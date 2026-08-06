@@ -2,7 +2,7 @@
 
 The public website for **RG App Studio**, the trading name of Manan Bohra, sole proprietor, India.
 
-Live site: _(add the GitHub Pages URL here once Pages is enabled)_
+Live site: **https://mananjain10.github.io/rg-app-studio/**
 
 ## Pages
 
