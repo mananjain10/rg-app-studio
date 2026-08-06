@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Refund &amp; Cancellation Policy — RG App Studio</title>
+<meta name="description" content="The Refund &amp; Cancellation Policy for RG App Studio and Culmo: how to cancel Culmo Pro, how to request a refund inside and after Google Play's 48-hour window, and how long refunds take. RG App Studio is the trading name of Manan Bohra, sole proprietor, India.">
+<meta name="color-scheme" content="dark">
+<style>
+/* =========================================================================
+   RG APP STUDIO — Refund & Cancellation Policy
+   Editorial Noir, in document register: calm, readable, one serif, one brass
+   accent. Same tokens as the studio site, the privacy policy and the terms.
+   Zero external requests, no cookies, no scripts. The wink stays true.
+   ========================================================================= */
+
+:root{
+  color-scheme: dark;
+
+  --bg:#0A0A0B;
+  --surface:#101012;
+  --elevated:#17171B;
+  --text:#F3EFE7;      /* warm ivory */
+  --muted:#8B857A;     /* warm grey, brass-biased */
+  --border:#242019;    /* warm near-black hairline base */
+  --accent:#C8A15A;    /* brass — the ONLY accent */
+
+  --hair: rgba(200,161,90,0.14);
+  --hair-strong: rgba(200,161,90,0.32);
+
+  --serif: "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans: -apple-system,"Segoe UI",Roboto,system-ui,"Helvetica Neue",Arial,sans-serif;
+  --mono: ui-monospace,"SFMono-Regular","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+
+  --e-underline: cubic-bezier(0.65,0,0.35,1);
+
+  --gutter: clamp(20px,5vw,72px);
+  --measure: 68ch;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; letter-spacing:-0.018em; text-wrap:balance; }
+p{ margin:0; }
+a{ color:inherit; text-decoration:none; }
+::selection{ background:rgba(200,161,90,0.28); color:#fff; }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+/* Subtle film grain, consistent with the studio site (no external request). */
+.grain{
+  position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.04;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px 160px;
+}
+
+/* ---- Inline link underline (brass wipe) ---- */
+.link{ position:relative; color:var(--text); overflow-wrap:anywhere; }
+.link::after{ content:""; position:absolute; left:0; bottom:-2px; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .34s var(--e-underline); }
+.link:hover::after{ transform:scaleX(1); }
+.link:not(:hover)::after{ transform-origin:right; }
+
+/* ---- Shell ---- */
+.wrap{ width:100%; max-width:820px; margin-inline:auto; padding-inline:var(--gutter); }
+
+/* ---- Masthead ---- */
+.masthead{ border-bottom:1px solid var(--hair); }
+.masthead-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px; height:66px; }
+.mark{ font-family:var(--serif); font-size:20px; letter-spacing:.02em; color:var(--text); }
+.mark b{ color:var(--accent); font-weight:400; }
+.back{ font-family:var(--sans); font-size:12.5px; letter-spacing:.04em; color:var(--muted); display:inline-flex; align-items:center; gap:8px; transition:color .3s ease; }
+.back:hover{ color:var(--text); }
+.back .arw{ color:var(--accent); }
+
+/* ---- Document head ---- */
+.dochead{ padding-block:clamp(48px,8vh,88px) clamp(28px,4vh,44px); }
+.folio{
+  font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent); display:flex; align-items:center; gap:12px; margin-bottom:22px;
+}
+.folio::after{ content:""; width:clamp(24px,6vw,72px); height:1px; background:var(--hair-strong); }
+.dochead h1{ font-size:clamp(2.1rem,5.4vw,3.5rem); line-height:1.04; margin-bottom:20px; }
+.docmeta{ font-family:var(--mono); font-size:12.5px; letter-spacing:.05em; color:var(--muted); line-height:1.8; }
+.docmeta .em{ color:var(--text); }
+
+/* ---- Contents ---- */
+.contents{ margin-top:clamp(30px,5vh,48px); border:1px solid var(--hair); border-radius:12px; padding:clamp(20px,3vw,30px); background:rgba(255,255,255,.012); }
+.contents h2{ font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+.toc{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:2px 28px; }
+@media (max-width:560px){ .toc{ grid-template-columns:1fr; } }
+.toc li{ display:flex; align-items:baseline; gap:12px; padding:6px 0; border-top:1px solid var(--hair); }
+.toc li:first-child, .toc li:nth-child(2){ border-top:none; }
+@media (max-width:560px){ .toc li:nth-child(2){ border-top:1px solid var(--hair); } }
+.toc .n{ font-family:var(--mono); font-size:11px; color:var(--accent); font-variant-numeric:tabular-nums; }
+.toc a{ font-size:14.5px; color:var(--muted); transition:color .25s ease; }
+.toc a:hover{ color:var(--text); }
+
+/* ---- Sections ---- */
+.section{ padding-block:clamp(40px,6vh,66px); border-top:1px solid var(--hair); }
+.section:first-of-type{ border-top:none; }
+.section > .measure{ max-width:var(--measure); }
+.section h2{ font-size:clamp(1.5rem,3.4vw,2.1rem); line-height:1.14; margin-bottom:6px; scroll-margin-top:24px; }
+.kicker{ font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.section h3{ font-size:1.18rem; line-height:1.3; margin-top:32px; margin-bottom:10px; color:var(--text); }
+.section p{ max-width:var(--measure); color:#d6d1c6; }
+.section p + p{ margin-top:14px; }
+.lead{ font-family:var(--serif); font-size:clamp(1.12rem,2vw,1.32rem); line-height:1.5; color:var(--text) !important; }
+strong{ color:var(--text); font-weight:600; }
+em{ font-style:italic; }
+
+ul.list{ max-width:var(--measure); margin:14px 0 0; padding:0; list-style:none; }
+ul.list li{ position:relative; padding-left:24px; margin-top:11px; color:#d6d1c6; }
+ul.list li::before{ content:""; position:absolute; left:2px; top:.72em; width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:.75; }
+ul.list li strong{ color:var(--text); }
+
+/* Highlighted "short version" panel */
+.panel{ max-width:var(--measure); margin-top:22px; border:1px solid var(--hair); border-left:2px solid var(--accent); border-radius:10px; padding:clamp(18px,3vw,26px); background:rgba(200,161,90,.035); }
+.panel .panel-lbl{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.panel ul{ margin:0; padding:0; list-style:none; }
+.panel li{ position:relative; padding-left:22px; margin-top:11px; color:#d6d1c6; }
+.panel li:first-child{ margin-top:0; }
+.panel li::before{ content:""; position:absolute; left:2px; top:.72em; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.panel li strong{ color:var(--text); }
+
+.app{ scroll-margin-top:24px; }
+.note{ max-width:var(--measure); margin-top:20px; font-family:var(--sans); font-size:13.5px; line-height:1.6; color:var(--muted); border-top:1px solid var(--hair); padding-top:16px; }
+
+/* ---- Price ladder (document register — hairline rows, no SaaS table) ---- */
+.prices{ max-width:var(--measure); margin-top:22px; }
+.price-row{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:14px 0; border-top:1px solid var(--hair); }
+.price-row:last-child{ border-bottom:1px solid var(--hair); }
+.price-row .pk{ font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.price-row .pv{ font-family:var(--mono); font-size:16px; color:var(--text); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.price-row .pv small{ font-size:.72em; color:var(--muted); letter-spacing:.06em; margin-left:4px; }
+
+/* Numbered steps (cancellation / refund paths) */
+ol.steps{ max-width:var(--measure); margin:14px 0 0; padding:0 0 0 1.5em; }
+ol.steps li{ margin-top:9px; color:#d6d1c6; }
+ol.steps li::marker{ font-family:var(--mono); font-size:.85em; color:var(--accent); }
+ol.steps + p, ul.list + p{ margin-top:14px; }
+
+/* Refund timeline ladder */
+.timeline{ max-width:var(--measure); margin-top:18px; }
+.tl-row{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:12px 0; border-top:1px solid var(--hair); }
+.tl-row:last-child{ border-bottom:1px solid var(--hair); }
+.tl-row .tk{ font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.tl-row .tv{ font-family:var(--mono); font-size:14.5px; color:var(--text); font-variant-numeric:tabular-nums; white-space:nowrap; }
+
+/* ---- Contact ---- */
+.contact-email{ font-family:var(--serif); font-size:clamp(1.4rem,3.4vw,2rem); color:var(--text); }
+.contact-email .link::after{ bottom:-3px; }
+
+/* ---- Footer ---- */
+.footer{ border-top:1px solid var(--hair); padding-block:clamp(36px,6vh,56px); }
+.footer .row{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+.footer .meta{ font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.footnav{ display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.legal-line{ margin-top:22px; font-family:var(--sans); font-size:11.5px; letter-spacing:.05em; line-height:1.8; color:var(--muted); max-width:70ch; }
+.legal-line a{ position:relative; color:var(--muted); transition:color .3s ease; }
+.legal-line a::after{ content:""; position:absolute; left:0; bottom:-2px; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .34s var(--e-underline); }
+.legal-line a:hover{ color:var(--text); }
+.legal-line a:hover::after{ transform:scaleX(1); }
+.legal-line a:not(:hover)::after{ transform-origin:right; }
+.footer .wink{ margin-top:16px; font-family:var(--sans); font-size:11.5px; letter-spacing:.06em; color:var(--muted); opacity:.72; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ transition-duration:.12s !important; }
+  .grain{ display:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="mark" href="../" aria-label="RG App Studio — home">R<b>G</b></a>
+    <a class="back" href="../">Back to studio <span class="arw" aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <!-- ===== DOCUMENT HEAD ===== -->
+  <div class="dochead">
+    <p class="folio">Refunds</p>
+    <h1>Refund &amp; Cancellation Policy</h1>
+    <p class="docmeta">
+      <span class="em">RG App Studio</span> — the trading name of <span class="em">Manan Bohra</span>, sole proprietor, India<br>
+      Last updated: <span class="em">21 July 2026</span> · Effective: <span class="em">21 July 2026</span><br>
+      Contact: <a class="link" href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a><br>
+      Related: <a class="link" href="../terms/">Terms of Use</a> · <a class="link" href="../privacy/">Privacy Policy</a>
+    </p>
+
+    <nav class="contents" aria-label="Contents">
+      <h2>On this page</h2>
+      <ol class="toc">
+        <li><span class="n">01</span><a href="#scope">What this policy covers</a></li>
+        <li><span class="n">02</span><a href="#pricing">What things cost</a></li>
+        <li><span class="n">03</span><a href="#delivery">Delivery</a></li>
+        <li><span class="n">04</span><a href="#cancellations">Cancelling a subscription</a></li>
+        <li><span class="n">05</span><a href="#refunds">Refunds</a></li>
+        <li><span class="n">06</span><a href="#timelines">How long a refund takes</a></li>
+        <li><span class="n">07</span><a href="#limits">What we can and cannot promise</a></li>
+        <li><span class="n">08</span><a href="#contact">Contact &amp; grievances</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- ===== 01 · SCOPE ===== -->
+  <section class="section" id="scope" aria-labelledby="scope-h">
+    <div class="measure">
+      <p class="kicker">01 — What this policy covers</p>
+      <h2 id="scope-h">What this policy covers</h2>
+      <p class="lead"><strong>RG App Studio is the trading name of Manan Bohra, sole proprietor, India.</strong> This page is the studio's Refund &amp; Cancellation Policy. It applies to every paid purchase in an RG App Studio app — today, that means <strong>Culmo Pro</strong> inside <strong>Culmo — Gym Workout Tracker</strong> (Google Play package <code style="font-family:var(--mono)">com.mananbohra.culmo</code>, category Health &amp; Fitness, Android) — listed on Google Play at <a class="link" href="https://play.google.com/store/apps/details?id=com.mananbohra.culmo">play.google.com/store/apps/details?id=com.mananbohra.culmo</a>.</p>
+      <p>This same policy also forms section 05 of our <a class="link" href="../terms/">Terms of Use</a>; it stands on its own page here so it is easy to find and easy to link to. Where it mentions what data we do or do not hold, the detail is in our <a class="link" href="../privacy/">Privacy Policy</a>.</p>
+      <p><strong>All purchases are processed by Google Play</strong>, using RevenueCat as billing infrastructure. RG App Studio never sees, handles or stores your card, UPI or other payment details. That single fact shapes everything below: cancellations happen in Google Play, and refunds are issued through Google Play rather than paid out by us.</p>
+    </div>
+  </section>
+
+  <!-- ===== 02 · PRICING ===== -->
+  <section class="section app" id="pricing" aria-labelledby="pricing-h">
+    <div class="measure">
+      <p class="kicker">02 — What things cost</p>
+      <h2 id="pricing-h">What things cost</h2>
+      <p>Culmo is <strong>free to download</strong> and free to use as a <strong>complete workout logger, permanently</strong>. Culmo Pro is an optional upgrade that unlocks the Adaptive Coach, Programs and the Program Generator, Smart Coach insights, deep analytics, RPE autoregulation, and smart warm-ups.</p>
+
+      <div class="prices" aria-label="Culmo Pro pricing">
+        <div class="price-row"><span class="pk">Culmo — the logger</span><span class="pv">Free<small>forever</small></span></div>
+        <div class="price-row"><span class="pk">Culmo Pro — monthly</span><span class="pv">$1.49<small>/ month</small></span></div>
+        <div class="price-row"><span class="pk">Culmo Pro — yearly</span><span class="pv">$14.99<small>/ year</small></span></div>
+        <div class="price-row"><span class="pk">Culmo Pro — lifetime</span><span class="pv">$25.99<small>one-time</small></span></div>
+      </div>
+
+      <p style="margin-top:20px">Prices above are shown in US dollars and are set in Google Play, so <strong>you are charged in your own local currency</strong> at the price Google Play lists for your country, including any taxes it applies. Google Play shows you the exact amount before you confirm — that amount, not the figure above, is what you pay.</p>
+      <p><strong>There is no free trial.</strong> You buy Culmo Pro directly, so you are never charged at the end of a trial you forgot to cancel. The monthly and yearly plans renew automatically until you cancel; the lifetime unlock is a one-time purchase and never renews.</p>
+    </div>
+  </section>
+
+  <!-- ===== 03 · DELIVERY ===== -->
+  <section class="section" id="delivery" aria-labelledby="delivery-h">
+    <div class="measure">
+      <p class="kicker">03 — Delivery</p>
+      <h2 id="delivery-h">Delivery</h2>
+      <p>Culmo is a <strong>digital product delivered entirely through Google Play</strong>. Nothing is shipped physically, there is no delivery address, and there is no delivery or shipping charge — so a shipping policy does not apply to anything we sell.</p>
+      <p>Pro features unlock on your device as soon as Google Play confirms the purchase, usually within seconds. If a purchase went through but Pro has not unlocked, open Culmo's settings and use <strong>Restore purchases</strong>. If that does not fix it, email us and we will help — and if we cannot fix it, that is exactly the kind of case we refund.</p>
+    </div>
+  </section>
+
+  <!-- ===== 04 · CANCELLATIONS ===== -->
+  <section class="section app" id="cancellations" aria-labelledby="cancel-h">
+    <div class="measure">
+      <p class="kicker">04 — Cancellations</p>
+      <h2 id="cancel-h">Cancelling a subscription</h2>
+      <p class="lead">You can cancel a Culmo Pro subscription at any time, and you cancel it in <strong>Google Play</strong> rather than inside the app — because Google Play, not us, holds the subscription.</p>
+
+      <h3>On your Android phone</h3>
+      <ol class="steps">
+        <li>Open the <strong>Play Store</strong> app and tap your profile icon.</li>
+        <li>Tap <strong>Payments &amp; subscriptions</strong>, then <strong>Subscriptions</strong>.</li>
+        <li>Select <strong>Culmo</strong>, tap <strong>Cancel subscription</strong>, and follow the instructions.</li>
+      </ol>
+
+      <h3>On a computer</h3>
+      <ol class="steps">
+        <li>Go to <a class="link" href="https://play.google.com/store/account/subscriptions">play.google.com/store/account/subscriptions</a>.</li>
+        <li>Click <strong>Manage</strong> next to Culmo, then <strong>Cancel subscription</strong>.</li>
+        <li>Select a reason and click <strong>Continue</strong>.</li>
+      </ol>
+
+      <h3>What happens after you cancel</h3>
+      <p>Cancelling stops the <em>next</em> renewal. It does not end your access straight away: <strong>Pro stays active until the end of the period you have already paid for.</strong> If you cancel on day 3 of a monthly plan, you keep Pro until day 30; if you cancel six months into a yearly plan, you keep Pro until that year ends.</p>
+      <p>We charge <strong>no cancellation fee</strong> of any kind, and cancelling is a normal, expected thing to do — there is no retention maze, no "are you sure" gauntlet, and nothing you have to email us to unlock. The current period is not automatically refunded pro rata when you cancel; if you think it should be refunded, see <a class="link" href="#refunds">Refunds</a> below and just ask us.</p>
+      <p>The <strong>one-time lifetime purchase is not a subscription</strong>. It never renews, so there is nothing to cancel.</p>
+      <p>When Pro ends, Culmo returns to being the free logger. <strong>Your workout history is not deleted</strong> — it is on your device and stays there, and you can still log, view and export it.</p>
+      <p class="note">If you paid through UPI AutoPay, a cancelled subscription may keep showing as active in your payments centre until the current billing period ends. That is Google Play's display behaviour, not a second charge.</p>
+    </div>
+  </section>
+
+  <!-- ===== 05 · REFUNDS ===== -->
+  <section class="section app" id="refunds" aria-labelledby="refunds-h">
+    <div class="measure">
+      <p class="kicker">05 — Refunds</p>
+      <h2 id="refunds-h">Refunds</h2>
+      <p class="lead">Because every purchase is processed by Google Play, refunds are requested and issued <strong>through Google Play</strong> — the money is returned to you by Google Play rather than paid out by us. What we decide, once Google's own window has passed, is whether the refund happens.</p>
+
+      <div class="panel">
+        <p class="panel-lbl">The short version</p>
+        <ul>
+          <li><strong>Within 48 hours</strong> of any purchase — subscription or lifetime — you can request a refund yourself in Google Play, without involving us.</li>
+          <li><strong>After 48 hours</strong>, Google directs refund requests to the developer. That is us. Email <a class="link" href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a> and we will review it.</li>
+          <li><strong>No cancellation fee, ever</strong>, and cancelling a subscription is always free and instant.</li>
+          <li><strong>We would rather refund you</strong> than keep money you feel you did not get value from.</li>
+        </ul>
+      </div>
+
+      <h3>Within 48 hours: request it yourself</h3>
+      <p>Google Play's own refund window is 48 hours from purchase, and it covers subscriptions and the one-time lifetime purchase alike:</p>
+      <ol class="steps">
+        <li>Go to <a class="link" href="https://play.google.com">play.google.com</a> and click your profile picture.</li>
+        <li>Click <strong>Payments &amp; subscriptions</strong>, then <strong>Budget &amp; order history</strong>.</li>
+        <li>Find the Culmo order and click <strong>Report a problem</strong>.</li>
+        <li>Select the option that describes your situation, complete the form and note that you would like a refund, then click <strong>Submit</strong>.</li>
+      </ol>
+      <p>You do not need our permission for this, and you do not need to tell us first.</p>
+
+      <h3>After 48 hours: write to us</h3>
+      <p>After 48 hours Google Play routes refund requests to the developer, so the decision comes to us. Email <a class="link" href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a> with your <strong>Google Play order number</strong> and a line about what went wrong. We usually reply within two business days, and we will issue a refund through Google Play wherever the request is reasonable — for example:</p>
+      <ul class="list">
+        <li>a purchase you did not intend to make, or one made on your account by someone else in your household;</li>
+        <li>a duplicate charge, or being charged twice for the same thing;</li>
+        <li>a renewal you did not realise was coming;</li>
+        <li>a Pro feature that does not work on your device and that we cannot fix for you.</li>
+      </ul>
+      <p>Renewals already taken for periods you actually used are not refunded automatically. But ask us anyway if something went wrong. We are one person and we read the emails; we would rather refund you than keep money you feel you did not get value from.</p>
+    </div>
+  </section>
+
+  <!-- ===== 06 · TIMELINES ===== -->
+  <section class="section" id="timelines" aria-labelledby="tl-h">
+    <div class="measure">
+      <p class="kicker">06 — How long a refund takes</p>
+      <h2 id="tl-h">How long a refund takes</h2>
+      <p>We usually review a refund request within <strong>two business days</strong> of receiving it. Once a refund is approved, Google Play returns the money to your <strong>original payment method</strong> — we cannot send it anywhere else. Typical times, which depend on your bank rather than on us:</p>
+
+      <div class="timeline" aria-label="Typical refund times by payment method">
+        <div class="tl-row"><span class="tk">Google Play balance</span><span class="tv">~1 business day</span></div>
+        <div class="tl-row"><span class="tk">UPI</span><span class="tv">1–3 business days</span></div>
+        <div class="tl-row"><span class="tk">Credit &amp; debit cards</span><span class="tv">3–5 business days</span></div>
+      </div>
+
+      <p style="margin-top:18px">Card refunds occasionally take up to about ten business days, depending on your issuer. If a refund we have approved has not reached you well past these windows, email us with the order number and we will chase it.</p>
+    </div>
+  </section>
+
+  <!-- ===== 07 · LIMITS ===== -->
+  <section class="section" id="limits" aria-labelledby="limits-h">
+    <div class="measure">
+      <p class="kicker">07 — What we can and cannot promise</p>
+      <h2 id="limits-h">What we can and cannot promise</h2>
+      <p>We would rather be straight about the limits than write a policy that quietly over-promises.</p>
+      <ul class="list">
+        <li><strong>The decision on a post-48-hour request is ours</strong>, and we make it — we do not bounce you back to Google.</li>
+        <li><strong>The money is returned by Google Play, not paid out by us</strong>, so we cannot control how quickly it reaches your bank.</li>
+        <li><strong>Google limits repeat refunds</strong> of the same product, so a product refunded once may not be refundable again.</li>
+        <li><strong>A refund ends the access it paid for.</strong> A refunded lifetime unlock stops being a lifetime unlock.</li>
+        <li><strong>Your workout history is untouched either way.</strong> It lives on your device and is never held hostage to a billing decision.</li>
+      </ul>
+      <p>Nothing in this policy limits any rights you may have under applicable Indian consumer law.</p>
+    </div>
+  </section>
+
+  <!-- ===== 08 · CONTACT ===== -->
+  <section class="section" id="contact" aria-labelledby="con-h">
+    <div class="measure">
+      <p class="kicker">08 — Contact &amp; grievances</p>
+      <h2 id="con-h">Contact &amp; grievances</h2>
+      <p>Refund requests, billing questions, support and grievances all go to the same place — one person, one inbox:</p>
+      <p class="contact-email" style="margin-top:16px;"><a class="link" href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a></p>
+      <p style="margin-top:18px">RG App Studio is the trading name of <strong>Manan Bohra</strong>, sole proprietor, India. We read every email and usually reply within two business days. For anything about a charge, please include your <strong>Google Play order number</strong> so we can find the transaction quickly.</p>
+      <p>See also our <a class="link" href="../terms/">Terms of Use</a> and our <a class="link" href="../privacy/">Privacy Policy</a>.</p>
+      <p class="note">Last updated 21 July 2026.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="row">
+      <span class="meta">RG App Studio · Made in India · © 2026</span>
+      <span class="footnav">
+        <a class="back" href="../terms/">Terms of Use</a>
+        <a class="back" href="../privacy/">Privacy Policy</a>
+        <a class="back" href="../">Back to studio <span class="arw" aria-hidden="true">→</span></a>
+      </span>
+    </div>
+    <!-- MERCHANT IDENTITY — OWNER ACTION RECOMMENDED. If you are willing to publish them, insert your
+         city and state before "India" below and in the identical .legal-line in /, /privacy/ and
+         /terms/, e.g. "…sole proprietor, Indore, Madhya Pradesh, India." Optionally add a support
+         phone with stated hours next to the email in §08. Left as-is deliberately: no locality or
+         number was supplied, and inventing one on a KYC-facing page would be worse than omitting it. -->
+    <p class="legal-line">RG App Studio is the trading name of Manan Bohra, sole proprietor, India. Sole support and grievance contact: <a href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a> — we read every email and usually reply within two business days.</p>
+    <p class="wink">No cookies. No trackers on this page either.</p>
+  </div>
+</footer>
+
+</body>
+</html>

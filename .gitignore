@@ -1,0 +1,21 @@
+# OS cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+._*
+
+# Editor cruft
+.vscode/
+.idea/
+*.swp
+*~
+
+# Never commit secrets — this site needs none, but keep the door shut
+*.key
+*.pem
+*.jks
+*.keystore
+key.properties
+.env
+.env.*

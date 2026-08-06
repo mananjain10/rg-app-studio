@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RG App Studio — Quiet software for a loud world</title>
+<meta name="description" content="An independent studio building private, on-device apps for health, focus, and the small habits that shape a life. No tracking. No dark patterns.">
+<meta name="color-scheme" content="dark">
+<style>
+/* =========================================================================
+   RG APP STUDIO — Editorial Noir
+   A matte-black design monograph. One serif, one brass accent, slow motion.
+   Committed dark world by design. Zero external requests (the wink is true).
+   ========================================================================= */
+
+:root{
+  color-scheme: dark;
+
+  --bg:#0A0A0B;
+  --surface:#101012;
+  --elevated:#17171B;
+  --text:#F3EFE7;      /* warm ivory */
+  --muted:#8B857A;     /* warm grey, brass-biased — chosen, not default */
+  --border:#242019;    /* warm near-black hairline base */
+  --accent:#C8A15A;    /* brass — the ONLY accent */
+  --accent2:#B5713F;   /* bronze — rationed to the Culmo curve alone */
+
+  --hair: rgba(200,161,90,0.14);   /* brass hairline */
+  --hair-strong: rgba(200,161,90,0.32);
+
+  /* One serif family for all display; system stack, high character, no fetch */
+  --serif: "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans: -apple-system,"Segoe UI",Roboto,system-ui,"Helvetica Neue",Arial,sans-serif;
+  --mono: ui-monospace,"SFMono-Regular","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+
+  /* Easing tokens (reused everywhere) */
+  --e-expo: cubic-bezier(0.19,1,0.22,1);
+  --e-out: cubic-bezier(0.22,1,0.36,1);
+  --e-nav: cubic-bezier(0.16,1,0.3,1);
+  --e-spring: cubic-bezier(0.34,1.56,0.64,1);
+  --e-underline: cubic-bezier(0.65,0,0.35,1);
+
+  --gutter: clamp(20px,5vw,72px);
+  --maxw: 1180px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:18px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;               /* contain bleeding headlines */
+}
+
+h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; text-wrap:balance; letter-spacing:-0.02em; }
+p{ margin:0; }
+a{ color:inherit; text-decoration:none; }
+::selection{ background:rgba(200,161,90,0.28); color:#fff; }
+
+:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; border-radius:2px; }
+
+/* ---- Fixed atmosphere layers ---- */
+.grain{
+  position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.05;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px 160px;
+}
+.spotlight{
+  position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0;
+  transition:opacity .8s var(--e-out);
+  background:radial-gradient(480px circle at var(--mx,50%) var(--my,50%), rgba(200,161,90,.05), transparent 62%);
+}
+
+/* ---- Layout primitives ---- */
+main{ position:relative; z-index:2; }   /* all content above the spotlight, below the grain */
+.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter); }
+.section{ position:relative; padding-block:clamp(72px,10vh,128px); }
+.rule{ height:1px; background:var(--hair); border:0; margin:0; }
+
+.folio{
+  font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent); font-variant-numeric:tabular-nums; margin-bottom:clamp(28px,5vh,64px);
+  display:flex; align-items:center; gap:12px;
+}
+.folio::after{ content:""; width:clamp(24px,6vw,72px); height:1px; background:var(--hair-strong); }
+
+.eyebrow{
+  font-family:var(--sans); font-size:12px; font-weight:500; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted);
+}
+.eyebrow .eb-sep{ color:var(--accent); }
+
+/* ---- Reveal system ---- */
+.reveal{ opacity:0; transform:translateY(26px); transition:opacity .82s var(--e-out), transform .82s var(--e-out); }
+.reveal.in{ opacity:1; transform:none; }
+.reveal[data-d="1"]{ transition-delay:.09s; }
+.reveal[data-d="2"]{ transition-delay:.18s; }
+.reveal[data-d="3"]{ transition-delay:.27s; }
+.reveal[data-d="4"]{ transition-delay:.36s; }
+
+/* =======================  NAV  ======================= */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:20;
+  transform:translateY(-102%); transition:transform .52s var(--e-nav), backdrop-filter .52s var(--e-nav), background .52s var(--e-nav);
+  background:rgba(10,10,11,0); border-bottom:1px solid transparent;
+}
+.nav.show{ transform:translateY(0); background:rgba(10,10,11,.62); backdrop-filter:blur(12px) saturate(1.1); -webkit-backdrop-filter:blur(12px) saturate(1.1); border-bottom:1px solid var(--hair); }
+.nav.peek-hide{ transform:translateY(-102%); }
+.nav-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px; height:64px; }
+.nav-mark{ font-family:var(--serif); font-size:20px; letter-spacing:.02em; }
+.nav-mark b{ color:var(--accent); font-weight:400; }
+.nav-links{ display:flex; gap:30px; }
+.nav-links a{ font-size:13px; letter-spacing:.02em; color:var(--muted); transition:color .3s ease; }
+.nav-links a:hover{ color:var(--text); }
+@media (max-width:720px){ .nav-links{ display:none; } }
+.pill{
+  font-family:var(--sans); font-size:13px; letter-spacing:.04em; color:var(--text);
+  padding:10px 20px; border:1px solid var(--hair-strong); border-radius:999px; background:transparent;
+  cursor:pointer; transition:border-color .35s ease, background .35s ease;
+  display:inline-flex; align-items:center; gap:9px; white-space:nowrap;
+}
+.pill:hover{ border-color:var(--accent); background:rgba(200,161,90,.06); }
+.pill:active{ transform:scale(.965); }
+
+/* =======================  HERO  ======================= */
+.hero{ min-height:100vh; min-height:100svh; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; padding-block:clamp(72px,9vh,104px) clamp(36px,5vh,72px); }
+.hero .folio{ margin-bottom:clamp(18px,3vh,36px); }
+.hero-eyebrow{ margin-bottom:16px; }
+.hero h1{
+  font-size:clamp(2.4rem,7.6vw,6.4rem); line-height:.98; letter-spacing:-0.028em;
+  max-width:16ch;
+}
+.line{ display:block; overflow:hidden; padding-bottom:.04em; }
+.line > span{ display:block; transform:translateY(112%); transition:transform 1.1s var(--e-expo); }
+.hero.loaded .line > span{ transform:none; }
+.hero.loaded .line:nth-child(2) > span{ transition-delay:.08s; }
+.hero.loaded .line:nth-child(3) > span{ transition-delay:.16s; }
+.tint{ color:var(--accent); color:color-mix(in srgb, var(--text), var(--accent) 90%); }
+.hero-sub{ margin-top:clamp(20px,3vh,30px); max-width:42ch; color:#c9c3b7; font-size:clamp(1rem,1.4vw,1.18rem); line-height:1.62; }
+.hero-sub b{ color:var(--text); font-weight:500; }
+
+.cta-row{ margin-top:clamp(24px,3.5vh,36px); display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
+.cta-primary{
+  font-family:var(--sans); font-size:15px; letter-spacing:.02em; color:var(--text);
+  padding:15px 30px; border:1px solid var(--hair-strong); border-radius:999px; background:transparent;
+  cursor:pointer; display:inline-flex; align-items:center; gap:10px; will-change:transform;
+  transition:border-color .4s ease, background .4s ease;
+}
+.cta-primary:hover{ border-color:var(--accent); background:rgba(200,161,90,.06); }
+.cta-primary:active{ transform:scale(.97); }
+.cta-primary .arw{ transition:transform .4s var(--e-out); color:var(--accent); }
+.cta-primary:hover .arw{ transform:translateX(4px); }
+
+.link-underline{ position:relative; color:var(--text); font-size:15px; padding-bottom:3px; padding-top:10px; margin-block:-10px; }
+.link-underline::after{ content:""; position:absolute; left:0; bottom:0; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .38s var(--e-underline); }
+.link-underline:hover::after{ transform:scaleX(1); }
+.link-underline:not(:hover)::after{ transform-origin:right; }
+
+.trust{ margin-top:clamp(20px,3vh,32px); display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-family:var(--sans); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+.trust .sep{ width:4px; height:4px; border-radius:50%; background:var(--accent); opacity:.7; }
+
+/* =======================  MANIFESTO  ======================= */
+.manifesto{ padding-block:clamp(88px,13vh,150px); position:relative; z-index:2; }
+.pull{
+  font-family:var(--serif); font-style:italic; font-weight:400;
+  font-size:clamp(1.7rem,4.6vw,3.7rem); line-height:1.16; letter-spacing:-0.015em;
+  max-width:20ch; color:var(--text);
+}
+.pull em{ color:var(--accent); font-style:italic; }
+.credit{ margin-top:clamp(32px,5vh,54px); font-family:var(--sans); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+
+/* =======================  WORK  ======================= */
+.work-head{ font-size:clamp(1.5rem,3.4vw,2.4rem); margin-bottom:clamp(36px,6vh,64px); color:var(--text); }
+
+/* Culmo — the cover story */
+.culmo{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,72px); align-items:center; }
+@media (max-width:900px){ .culmo{ grid-template-columns:1fr; gap:40px; } }
+.culmo-cat{ font-family:var(--sans); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
+.culmo-title{ font-size:clamp(2.6rem,6vw,4.8rem); line-height:1; margin-bottom:22px; }
+.culmo-desc{ max-width:38ch; color:#c9c3b7; font-size:1.05rem; line-height:1.6; }
+.chip{ margin-top:26px; display:inline-flex; align-items:center; gap:10px; padding:9px 16px; border:1px solid var(--hair); border-radius:999px; font-family:var(--sans); font-size:12px; letter-spacing:.06em; color:var(--text); }
+.chip-link{ transition:border-color .35s ease, background .35s ease; }
+.chip-link:hover{ border-color:var(--accent); background:rgba(200,161,90,.06); }
+.chip-arw{ display:inline-block; color:var(--accent); transition:transform .4s var(--e-out); }
+.chip-link:hover .chip-arw{ transform:translateX(3px); }
+.dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 0 rgba(200,161,90,.5); animation:breathe 2.6s ease-in-out infinite; }
+@keyframes breathe{ 0%,100%{ box-shadow:0 0 0 0 rgba(200,161,90,.45); } 50%{ box-shadow:0 0 0 6px rgba(200,161,90,0); } }
+
+/* Culmo — phone mockup (pure flow, nothing absolute over text) */
+.slab{
+  position:relative; aspect-ratio:9/18; width:100%; max-width:300px; margin-inline:auto;
+  background:#0B0B0C; border:1px solid var(--hair-strong); border-radius:30px; overflow:hidden;
+  padding:20px; display:flex; flex-direction:column; gap:14px; will-change:transform;
+}
+.slab-glow{ position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(300px circle at 72% 18%, rgba(200,161,90,.18), transparent 60%); opacity:.16; transition:opacity .6s var(--e-out); }
+.slab > *:not(.slab-glow){ position:relative; z-index:1; }
+
+.ph-bar{ display:flex; justify-content:space-between; align-items:center; font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+.ph-brand{ color:var(--text); }
+.ph-on{ color:var(--accent); display:inline-flex; align-items:center; gap:6px; }
+.ph-on .dot{ width:6px; height:6px; }
+
+.ph-head{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+.ph-session{ font-family:var(--serif); font-size:1.3rem; line-height:1; color:var(--text); }
+.ph-time{ font-family:var(--mono); font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
+
+.ph-card{ background:var(--elevated); border:1px solid var(--hair); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:9px; }
+.ph-ex{ font-family:var(--serif); font-size:1.05rem; line-height:1; color:var(--text); margin-bottom:3px; }
+.ph-set{ display:flex; align-items:center; gap:12px; font-family:var(--mono); font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.ph-set .ph-sn{ width:1ch; opacity:.65; }
+.ph-set .ph-sv{ flex:1; }
+.ph-set .ph-ck{ color:var(--accent); }
+.ph-set-live{ color:var(--text); }
+.ph-pr{ font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:.1em; background:var(--accent); color:#0A0A0B; border-radius:4px; padding:2px 6px; }
+
+.ph-rest{ display:flex; flex-direction:column; gap:8px; }
+.ph-rest-row{ display:flex; justify-content:space-between; align-items:baseline; }
+.ph-rest-lbl{ font-family:var(--sans); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+.ph-rest-time{ font-family:var(--mono); font-size:13px; color:var(--text); font-variant-numeric:tabular-nums; }
+.ph-track{ height:3px; border-radius:999px; background:rgba(200,161,90,.14); overflow:hidden; }
+.ph-fill{ display:block; height:100%; width:60%; border-radius:999px; background:var(--accent); animation:restPulse 3.4s var(--e-out) infinite alternate; }
+@keyframes restPulse{ from{ width:50%; } to{ width:70%; } }
+
+.ph-stats{ margin-top:auto; display:flex; gap:22px; }
+.ph-stat .k{ font-family:var(--sans); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:4px; }
+.ph-stat .v{ font-family:var(--mono); font-size:clamp(18px,4.5vw,22px); color:var(--text); font-variant-numeric:tabular-nums; }
+.ph-stat .v small{ font-size:.5em; color:var(--muted); letter-spacing:.06em; margin-left:3px; }
+
+.culmo-id{ margin-top:18px; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); line-height:1.9; }
+.culmo-id span{ white-space:nowrap; }
+.culmo-id .pkg{ white-space:normal; overflow-wrap:anywhere; }
+
+/* Culmo — pricing (still part of the cover story) */
+.pricing{
+  margin-top:clamp(44px,6vh,72px); padding-top:clamp(30px,4vh,44px); border-top:1px solid var(--hair);
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,5vw,72px); align-items:start;
+}
+@media (max-width:900px){ .pricing{ grid-template-columns:1fr; gap:34px; } }
+.pc-kicker{ font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.pc-title{ font-family:var(--serif); font-size:clamp(1.35rem,3vw,2.1rem); line-height:1.16; color:var(--text); margin-bottom:16px; max-width:18ch; }
+.pc-lede{ color:#c9c3b7; font-size:1rem; line-height:1.62; max-width:40ch; }
+.pc-unlocks{ margin-top:16px; color:var(--muted); font-size:.96rem; line-height:1.62; max-width:44ch; }
+.pc-unlocks b{ color:var(--text); font-weight:500; }
+.pc-row{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-top:1px solid var(--hair); }
+.pc-row:first-of-type{ padding-top:0; border-top:none; }
+.pc-row:last-of-type{ border-bottom:1px solid var(--hair); }
+@media (max-width:900px){ .pc-row:first-of-type{ padding-top:15px; border-top:1px solid var(--hair); } }
+.pc-name{ font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); min-width:0; }
+.pc-price{ font-family:var(--mono); font-size:clamp(15px,3.6vw,17px); color:var(--text); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.pc-price small{ font-size:.72em; color:var(--muted); letter-spacing:.06em; margin-left:4px; }
+.pc-note{ margin-top:20px; font-size:13.5px; line-height:1.68; color:var(--muted); max-width:46ch; }
+.pc-link{ position:relative; color:var(--text); }
+.pc-link::after{ content:""; position:absolute; left:0; bottom:-2px; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .34s var(--e-underline); }
+.pc-link:hover::after{ transform:scaleX(1); }
+.pc-link:not(:hover)::after{ transform-origin:right; }
+
+/* In-development rows */
+.rows{ margin-top:clamp(44px,7vh,76px); }
+.row{
+  display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:clamp(20px,4vw,52px);
+  padding-block:clamp(26px,4vh,44px); border-top:1px solid var(--hair); position:relative;
+  transition:background .5s var(--e-out);
+}
+.row:last-child{ border-bottom:1px solid var(--hair); }
+.row:hover{ background:rgba(255,255,255,.014); }
+.row-idx{
+  font-family:var(--serif); font-size:clamp(2.4rem,6vw,5rem); line-height:.9;
+  -webkit-text-stroke:1px rgba(200,161,90,.5); color:transparent;
+  transition:color .5s var(--e-out), -webkit-text-stroke-color .5s var(--e-out);
+  font-variant-numeric:tabular-nums;
+}
+.row:hover .row-idx{ color:rgba(200,161,90,.14); }
+.row-body{ min-width:0; }
+.row-title{ font-family:var(--serif); font-size:clamp(1.3rem,2.8vw,2rem); line-height:1.1; margin-bottom:12px; color:var(--text); }
+.row-desc{ color:var(--muted); font-size:1rem; line-height:1.55; max-width:52ch; }
+.row-tag{ margin-top:16px; display:inline-flex; align-items:center; gap:9px; font-family:var(--sans); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.row-tag .dot{ width:6px; height:6px; }
+
+/* Living app-window mockups (the "images") */
+.mock{ width:150px; align-self:center; background:#121214; border:1px solid var(--hair); border-radius:16px; padding:12px; }
+.mk-lbl{ font-family:var(--sans); font-size:8.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin-top:7px; }
+/* Alarm */
+.mk-time{ font-family:var(--mono); font-size:1.9rem; line-height:1; color:var(--text); font-variant-numeric:tabular-nums; letter-spacing:.02em; }
+.mk-eq{ font-family:var(--mono); font-size:12px; color:var(--muted); margin-top:11px; }
+.mk-chips{ display:flex; gap:6px; margin-top:8px; }
+.mk-chips span{ flex:1; text-align:center; font-family:var(--mono); font-size:11px; color:var(--muted); border:1px solid var(--hair); border-radius:6px; padding:5px 0; opacity:0; transform:translateY(4px); transition:opacity .5s var(--e-out), transform .5s var(--e-out); }
+.mk-chips span.on{ color:var(--accent); border-color:var(--hair-strong); }
+.row.in .mk-chips span{ opacity:1; transform:none; }
+.row.in .mk-chips span:nth-child(1){ transition-delay:.16s; }
+.row.in .mk-chips span:nth-child(2){ transition-delay:.29s; }
+.row.in .mk-chips span:nth-child(3){ transition-delay:.42s; }
+/* Water */
+.mk-glass{ position:relative; height:64px; width:46px; margin:2px auto 0; border:1.5px solid var(--hair-strong); border-top:none; border-radius:5px 5px 10px 10px; overflow:hidden; background:rgba(200,161,90,.04); }
+.mk-fill{ position:absolute; left:0; right:0; bottom:0; height:0%; background:linear-gradient(rgba(200,161,90,.5),rgba(181,113,63,.58)); transition:height 1.2s var(--e-out); }
+.row.in .mk-fill{ height:60%; }
+.mk-amt{ font-family:var(--mono); font-size:12px; color:var(--text); text-align:center; margin-top:9px; font-variant-numeric:tabular-nums; }
+.mock-water .mk-lbl{ text-align:center; }
+/* Focus */
+.mk-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+.tile{ position:relative; aspect-ratio:1; border-radius:6px; background:#1C1C20; }
+.tile.locked{ opacity:.5; }
+.tile.locked i{ position:absolute; top:4px; right:4px; width:4px; height:4px; border-radius:50%; background:var(--accent); opacity:.85; }
+.tile.lit{ opacity:1; background:linear-gradient(135deg, rgba(200,161,90,.92), rgba(181,113,63,.82)); }
+.mk-pill{ margin-top:11px; text-align:center; font-family:var(--sans); font-size:8.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); border:1px solid var(--hair); border-radius:999px; padding:5px 8px; }
+
+@media (max-width:640px){
+  .row{ grid-template-columns:auto 1fr; grid-template-areas:"idx mock" "body body"; row-gap:22px; }
+  .row-idx{ grid-area:idx; } .mock{ grid-area:mock; justify-self:end; } .row-body{ grid-area:body; }
+}
+
+/* =======================  PRINCIPLES  ======================= */
+.principles-intro{ font-family:var(--serif); font-size:clamp(1.5rem,3.6vw,2.6rem); line-height:1.18; max-width:22ch; margin-bottom:clamp(40px,6vh,72px); color:var(--text); }
+.principles-intro b{ color:var(--accent); font-weight:400; font-style:italic; }
+.principle{ display:grid; grid-template-columns:auto 1fr; gap:clamp(20px,4vw,56px); padding:clamp(26px,4vh,44px) 0; border-top:1px solid var(--hair); position:relative; }
+.principle::before{ content:""; position:absolute; top:-1px; left:0; height:1px; width:100%; background:var(--accent); opacity:.4; transform:scaleX(0); transform-origin:left; transition:transform .9s var(--e-out); }
+.principle.in::before{ transform:scaleX(1); }
+.principle:last-of-type{ border-bottom:1px solid var(--hair); }
+.principle-n{ font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--accent); font-variant-numeric:tabular-nums; padding-top:8px; }
+.principle-stmt{ font-family:var(--serif); font-size:clamp(1.2rem,2.4vw,1.7rem); line-height:1.25; color:var(--text); margin-bottom:12px; }
+.principle-sub{ color:var(--muted); font-size:1rem; line-height:1.55; max-width:56ch; }
+
+/* Refusals marquee */
+.marquee{ margin-top:clamp(48px,8vh,92px); overflow:hidden; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding-block:clamp(22px,4vh,40px); }
+.marquee-track{ display:flex; white-space:nowrap; width:max-content; will-change:transform; }
+.marquee-track span{
+  font-family:var(--serif); font-size:clamp(1.6rem,4vw,3.2rem); letter-spacing:.01em;
+  -webkit-text-stroke:1px rgba(200,161,90,.42); color:transparent; padding-inline:.4em;
+}
+.marquee-track span.solid{ color:rgba(243,239,231,.06); -webkit-text-stroke:1px transparent; }
+@supports not (-webkit-text-stroke: 1px black){ .row-idx{ color:rgba(200,161,90,.5); } .marquee-track span{ color:rgba(243,239,231,.14); } }
+
+/* =======================  ABOUT  ======================= */
+.about{ display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(40px,7vw,110px); align-items:start; }
+@media (max-width:840px){ .about{ grid-template-columns:1fr; gap:56px; } }
+.about-lead{ font-family:var(--serif); font-size:clamp(1.4rem,2.8vw,2rem); line-height:1.4; max-width:22ch; color:var(--text); margin-bottom:34px; }
+.about-body{ color:var(--muted); font-size:1.05rem; line-height:1.65; max-width:46ch; }
+.facts{ display:flex; flex-direction:column; }
+.fact{ display:flex; justify-content:space-between; align-items:baseline; gap:18px; padding:16px 0; border-top:1px solid var(--hair); font-family:var(--sans); font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
+.fact:last-child{ border-bottom:1px solid var(--hair); }
+.fact .fk{ color:var(--muted); } .fact .fv{ color:var(--text); font-variant-numeric:tabular-nums; }
+.seal{ margin-top:44px; align-self:flex-start; width:132px; height:132px; background:var(--elevated); border:1px solid var(--hair); border-radius:14px; display:grid; place-items:center; transform:rotate(-3deg); box-shadow:0 24px 60px -30px rgba(0,0,0,.8); }
+.seal svg{ width:74px; height:74px; color:var(--accent); }
+
+/* =======================  FOOTER  ======================= */
+.footer{ padding-top:clamp(80px,12vh,150px); padding-bottom:clamp(48px,8vh,80px); position:relative; z-index:2; }
+.lets{ font-family:var(--serif); font-size:clamp(3rem,12vw,9rem); line-height:.94; letter-spacing:-0.03em; color:var(--text); margin-bottom:clamp(28px,5vh,52px); }
+.email-line{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.email{ position:relative; font-family:var(--serif); font-size:clamp(1.4rem,4vw,2.6rem); color:var(--text); cursor:pointer; padding-bottom:6px; padding-block:6px; margin-block:-6px; will-change:transform; overflow-wrap:anywhere; max-width:100%; }
+.email::after{ content:""; position:absolute; left:0; bottom:0; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .34s var(--e-underline); }
+.email:hover::after{ transform:scaleX(1); }
+.email:not(:hover)::after{ transform-origin:right; }
+.toast{ font-family:var(--sans); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); opacity:0; transform:translateY(6px); transition:opacity .3s, transform .3s; }
+.toast.show{ opacity:1; transform:translateY(0); }
+
+.ticker{ margin-top:clamp(56px,9vh,110px); font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:2px; }
+.ticker .cur{ display:inline-block; width:8px; height:14px; background:var(--accent); margin-left:6px; animation:blink 1.05s steps(1) infinite; }
+@keyframes blink{ 0%,50%{ opacity:1; } 51%,100%{ opacity:0; } }
+
+.colophon{ margin-top:clamp(44px,7vh,80px); padding-top:26px; border-top:1px solid var(--hair); display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+.colophon .meta{ font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.colophon .status{ display:flex; align-items:center; gap:10px; font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.colophon .privacy-link{ position:relative; color:var(--muted); transition:color .3s ease; }
+.colophon .privacy-link::after{ content:""; position:absolute; left:0; bottom:-2px; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .34s var(--e-underline); }
+.colophon .privacy-link:hover{ color:var(--text); }
+.colophon .privacy-link:hover::after{ transform:scaleX(1); }
+.colophon .privacy-link:not(:hover)::after{ transform-origin:right; }
+.legal-line{ margin-top:22px; font-family:var(--sans); font-size:11.5px; letter-spacing:.05em; line-height:1.8; color:var(--muted); max-width:70ch; }
+.legal-line a{ position:relative; color:var(--muted); transition:color .3s ease; }
+.legal-line a::after{ content:""; position:absolute; left:0; bottom:-2px; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .34s var(--e-underline); }
+.legal-line a:hover{ color:var(--text); }
+.legal-line a:hover::after{ transform:scaleX(1); }
+.legal-line a:not(:hover)::after{ transform-origin:right; }
+.wink{ margin-top:16px; font-family:var(--sans); font-size:11.5px; letter-spacing:.06em; color:var(--muted); opacity:.72; }
+
+/* =======================  REDUCED MOTION  ======================= */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.15s !important; }
+  .reveal{ opacity:1 !important; transform:none !important; }
+  .line > span{ transform:none !important; }
+  .principle::before{ transform:scaleX(1) !important; }
+  .spotlight,.grain{ display:none !important; }
+  .ph-fill{ animation:none !important; width:60% !important; }
+  .mk-chips span{ opacity:1 !important; transform:none !important; }
+  .mk-fill{ height:60% !important; }
+}
+</style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}.line>span{transform:none!important}.mk-chips span{opacity:1!important;transform:none!important}.mk-fill{height:60%!important}</style></noscript>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-mark" href="#top" aria-label="RG App Studio — home">R<b>G</b></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#ethos">Ethos</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="pill magnetic" href="#work">Meet Culmo <span aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===== HERO ===== -->
+  <section class="section hero" aria-labelledby="hero-h">
+    <div class="wrap">
+      <p class="folio">00 — RG App Studio</p>
+      <p class="eyebrow hero-eyebrow">Independent studio <span class="eb-sep">·</span> Made in India</p>
+      <h1 id="hero-h">
+        <span class="line"><span>Quiet software</span></span>
+        <span class="line"><span>for a</span></span>
+        <span class="line"><span><span class="tint">loud</span> world.</span></span>
+      </h1>
+      <p class="hero-sub reveal" data-d="2">An independent studio building <b>private, on-device apps</b> for health, focus, and the small habits that shape a life. Everything runs on your device. No tracking. No dark patterns.</p>
+      <div class="cta-row reveal" data-d="3">
+        <a class="cta-primary magnetic" href="#work">Meet Culmo <span class="arw" aria-hidden="true">→</span></a>
+        <a class="link-underline" href="#ethos">Read the ethos</a>
+      </div>
+      <div class="trust reveal" data-d="4">
+        <span>On-device</span><span class="sep"></span>
+        <span>Offline-first</span><span class="sep"></span>
+        <span>No telemetry</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MANIFESTO ===== -->
+  <section class="section manifesto" id="ethos" aria-labelledby="ethos-h">
+    <div class="wrap">
+      <p class="folio reveal">01 — Ethos</p>
+      <h2 class="pull reveal" data-d="1" id="ethos-h">We think the best software <em>disappears</em> — it does its small job, respects your attention, and stays out of the way.</h2>
+      <p class="credit reveal" data-d="2">The Studio — Est. 2026</p>
+    </div>
+  </section>
+
+  <!-- ===== WORK ===== -->
+  <section class="section" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <p class="folio reveal">02 — Work</p>
+      <h2 class="work-head reveal" data-d="1" id="work-h">Four apps. One belief.</h2>
+
+      <!-- Culmo cover story -->
+      <div class="culmo">
+        <div>
+          <p class="culmo-cat reveal">Private workout tracker</p>
+          <h3 class="culmo-title reveal" data-d="1">Culmo</h3>
+          <p class="culmo-desc reveal" data-d="2">A private gym &amp; workout tracker with an on-device coach that adapts to you — every set stays on your phone.</p>
+          <a class="chip chip-link reveal" data-d="3" href="https://play.google.com/store/apps/details?id=com.mananbohra.culmo"><span class="dot"></span> Culmo on Google Play <span class="chip-arw" aria-hidden="true">→</span></a>
+          <!-- STATUS LINE — OWNER ACTION REQUIRED.
+               Verified 6 Aug 2026: the Play listing above returns HTTP 404, i.e. it is not
+               publicly reachable. That 404 is almost certainly the literal cause of the BillDesk
+               rejection ("Mobile Application(s) is not live/does not exist/not accessible"), and
+               no website copy can fix it — the listing itself has to go public.
+               The previous vague chip was removed because it confirmed the rejection reason
+               back to the reviewer.
+               Once you know the true stage, state it here — and ONLY the true stage, e.g.
+                 <span class="chip">Available on Google Play</span>
+                 <span class="chip">In closed testing on Google Play · public listing DD Month 2026</span>
+               Do NOT publish a "live" claim while the URL above still 404s. -->
+          <p class="culmo-id reveal" data-d="3">
+            <span>Culmo — Gym Workout Tracker</span> ·
+            <span>Health &amp; Fitness</span> ·
+            <span>Android</span><br>
+            <span class="pkg">Google Play package: com.mananbohra.culmo</span>
+          </p>
+        </div>
+        <div class="slab reveal" data-d="2" id="slab" aria-label="Culmo — an active workout session on device">
+          <div class="slab-glow" id="slabGlow"></div>
+          <div class="ph-bar"><span class="ph-brand">Culmo</span><span class="ph-on"><span class="dot"></span> On device</span></div>
+          <div class="ph-head"><span class="ph-session">Push Day A</span><span class="ph-time">00:42:17</span></div>
+          <div class="ph-card">
+            <div class="ph-ex">Bench Press</div>
+            <div class="ph-set"><span class="ph-sn">1</span><span class="ph-sv">80 kg × 8</span><span class="ph-ck" aria-hidden="true">✓</span></div>
+            <div class="ph-set"><span class="ph-sn">2</span><span class="ph-sv">85 kg × 6</span><span class="ph-ck" aria-hidden="true">✓</span></div>
+            <div class="ph-set ph-set-live"><span class="ph-sn">3</span><span class="ph-sv">87.5 kg × 5</span><span class="ph-pr">PR</span></div>
+          </div>
+          <div class="ph-rest">
+            <div class="ph-rest-row"><span class="ph-rest-lbl">Rest</span><span class="ph-rest-time">01:30</span></div>
+            <div class="ph-track"><span class="ph-fill"></span></div>
+          </div>
+          <div class="ph-stats">
+            <div class="ph-stat"><span class="k">Est. 1RM</span><span class="v"><span data-count="156">156</span><small>KG</small></span></div>
+            <div class="ph-stat"><span class="k">This week</span><span class="v"><span data-count="12480">12,480</span><small>KG</small></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Culmo pricing — part of the cover story -->
+      <div class="pricing" id="pricing">
+        <div>
+          <p class="pc-kicker reveal">Pricing</p>
+          <h3 class="pc-title reveal" data-d="1">Free to log. Pro only if you want the coach.</h3>
+          <p class="pc-lede reveal" data-d="1">Culmo is free to download and free to use as a complete workout logger — permanently. Log every session, keep your whole history, export it whenever you like. Culmo Pro is optional, and nothing you have already logged is ever locked behind it.</p>
+          <p class="pc-unlocks reveal" data-d="2">Pro unlocks the <b>Adaptive Coach</b>, <b>Programs and the Program Generator</b>, <b>Smart Coach insights</b>, <b>deep analytics</b>, <b>RPE autoregulation</b> and <b>smart warm-ups</b>.</p>
+        </div>
+        <div class="reveal" data-d="2">
+          <div class="pc-row">
+            <span class="pc-name">Culmo — the logger</span>
+            <span class="pc-price">Free<small>forever</small></span>
+          </div>
+          <div class="pc-row">
+            <span class="pc-name">Culmo Pro — monthly</span>
+            <span class="pc-price">$1.49<small>/ month</small></span>
+          </div>
+          <div class="pc-row">
+            <span class="pc-name">Culmo Pro — yearly</span>
+            <span class="pc-price">$14.99<small>/ year</small></span>
+          </div>
+          <div class="pc-row">
+            <span class="pc-name">Culmo Pro — lifetime</span>
+            <span class="pc-price">$25.99<small>one-time</small></span>
+          </div>
+          <p class="pc-note">
+            Prices are shown in US dollars and are set in Google Play; you are charged in your own local currency, and Google Play shows you the exact amount before you confirm. <strong style="color:var(--text);font-weight:500">There is no free trial</strong> — you buy directly, so you are never charged at the end of a trial you forgot about. All purchases are processed by Google Play; we never see or store your card details.
+            <br><br>Full <a class="pc-link" href="refunds/">refund &amp; cancellation policy</a>, and the <a class="pc-link" href="terms/">terms of use</a>.
+          </p>
+        </div>
+      </div>
+
+      <!-- In-development rows -->
+      <div class="rows">
+        <article class="row reveal">
+          <div class="row-idx">02</div>
+          <div class="row-body">
+            <h3 class="row-title">The alarm you have to outsmart</h3>
+            <p class="row-desc">A puzzle-locked alarm clock — solve a challenge to dismiss it, so you actually wake up instead of hitting snooze.</p>
+            <span class="row-tag"><span class="dot"></span> In development</span>
+          </div>
+          <div class="mock mock-alarm" aria-hidden="true">
+            <div class="mk-time">06:30</div>
+            <div class="mk-lbl">Solve to dismiss</div>
+            <div class="mk-eq">7 × 8 = ?</div>
+            <div class="mk-chips"><span>54</span><span class="on">56</span><span>58</span></div>
+          </div>
+        </article>
+
+        <article class="row reveal">
+          <div class="row-idx">03</div>
+          <div class="row-body">
+            <h3 class="row-title">A gentle nudge to drink water</h3>
+            <p class="row-desc">A calm hydration reminder that reads your day and asks for a sip at the right moment — never nags.</p>
+            <span class="row-tag"><span class="dot"></span> In development</span>
+          </div>
+          <div class="mock mock-water" aria-hidden="true">
+            <div class="mk-glass"><span class="mk-fill"></span></div>
+            <div class="mk-amt">1.4 / 2.4 L</div>
+            <div class="mk-lbl">Next sip 3:40 PM</div>
+          </div>
+        </article>
+
+        <article class="row reveal">
+          <div class="row-idx">04</div>
+          <div class="row-body">
+            <h3 class="row-title">Focus, reclaimed</h3>
+            <p class="row-desc">A digital-wellbeing app that quietly walls off distracting apps and screen time, so your attention comes back to you.</p>
+            <span class="row-tag"><span class="dot"></span> In development</span>
+          </div>
+          <div class="mock mock-focus" aria-hidden="true">
+            <div class="mk-grid">
+              <span class="tile lit"></span>
+              <span class="tile locked"><i></i></span>
+              <span class="tile locked"><i></i></span>
+              <span class="tile locked"><i></i></span>
+              <span class="tile locked"><i></i></span>
+              <span class="tile locked"><i></i></span>
+            </div>
+            <div class="mk-pill">Focus until 5:00 PM</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRINCIPLES ===== -->
+  <section class="section" id="principles" aria-labelledby="pr-h">
+    <div class="wrap">
+      <p class="folio reveal">03 — Refusals</p>
+      <h2 class="principles-intro reveal" data-d="1" id="pr-h">What we <b>refuse</b> to do is as important as what we build.</h2>
+
+      <div class="principle reveal">
+        <div class="principle-n">01</div>
+        <div><p class="principle-stmt">On your device, always.</p><p class="principle-sub">Every app does its data work locally — your logs, habits, and history never leave your phone.</p></div>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-n">02</div>
+        <div><p class="principle-stmt">No tracking, no analytics on you.</p><p class="principle-sub">We don't need to watch you to build something good.</p></div>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-n">03</div>
+        <div><p class="principle-stmt">No dark patterns.</p><p class="principle-sub">No fake urgency, no guilt streaks, no traps to cancel. Leaving is as easy as arriving.</p></div>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-n">04</div>
+        <div><p class="principle-stmt">You own your data.</p><p class="principle-sub">Export it, delete it, take it with you — it was always yours.</p></div>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-n">05</div>
+        <div><p class="principle-stmt">Built by hand, one at a time.</p><p class="principle-sub">Each app ships only when it earns a place on your home screen.</p></div>
+      </div>
+    </div>
+
+    <div class="marquee" id="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marqueeTrack"></div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section" id="about" aria-labelledby="ab-h">
+    <div class="wrap about">
+      <div>
+        <p class="folio reveal">04 — About</p>
+        <h2 class="about-lead reveal" data-d="1" id="ab-h">One person, building slowly and on purpose.</h2>
+        <p class="about-body reveal" data-d="2">RG App Studio is one person, building slowly and on purpose. Each app ships only when it earns a place on your home screen. Made by hand in India.</p>
+      </div>
+      <div class="reveal" data-d="2">
+        <div class="facts">
+          <div class="fact"><span class="fk">Founded</span><span class="fv">2026</span></div>
+          <div class="fact"><span class="fk">Based in</span><span class="fv">India</span></div>
+          <div class="fact"><span class="fk">Apps in progress</span><span class="fv">04</span></div>
+        </div>
+        <div class="seal" title="RG maker's mark">
+          <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M26 74 L26 30 Q26 26 30 26 L46 26 Q56 26 56 38 Q56 50 46 50 L30 50 M44 50 L58 74" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M78 30 Q66 26 62 38 Q58 52 66 60 Q74 68 78 58 L78 50 L70 50" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="section footer" id="contact" aria-labelledby="ft-h">
+    <div class="wrap">
+      <div class="rule reveal" style="margin-bottom:clamp(48px,8vh,90px)"></div>
+      <p class="folio reveal">05 — Contact</p>
+      <h2 class="lets reveal" id="ft-h">Let's talk.</h2>
+      <div class="email-line reveal" data-d="1">
+        <span class="email magnetic" id="email" role="button" tabindex="0" aria-label="Copy email address manangamestudio@gmail.com">manangamestudio@gmail.com</span>
+        <span class="toast" id="toast" role="status" aria-live="polite">Copied</span>
+      </div>
+      <div class="ticker reveal" data-d="2">Studio status: Building<span class="cur" aria-hidden="true"></span></div>
+      <div class="colophon reveal" data-d="2">
+        <span class="meta">RG App Studio · Made in India · © 2026 · <a class="privacy-link" href="privacy/">Privacy</a> · <a class="privacy-link" href="terms/">Terms</a> · <a class="privacy-link" href="refunds/">Refunds &amp; cancellation</a></span>
+        <span class="status"><span class="dot"></span> Building quietly</span>
+      </div>
+      <!-- MERCHANT IDENTITY — OWNER ACTION RECOMMENDED.
+           A payment-aggregator reviewer reconciling KYC individual "Manan Bohra" cannot place this
+           merchant geographically from "India" alone. If you are willing to publish them, insert your
+           city and state before "India" in the line below (and in the identical .legal-line in
+           /privacy/, /terms/ and /refunds/), e.g.
+             "…sole proprietor, Indore, Madhya Pradesh, India."
+           Optionally add a support phone with stated hours (e.g. "Mon–Fri, 10:00–18:00 IST") next to
+           the email in /terms/ §12 and /refunds/ §08.
+           Left as-is deliberately: no locality or phone number was supplied, and inventing one on a
+           KYC-facing page would be worse than omitting it. -->
+      <p class="legal-line reveal" data-d="3">RG App Studio is the trading name of Manan Bohra, sole proprietor, India. Sole support and grievance contact: <a href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a> — we read every email and usually reply within two business days.</p>
+      <p class="wink reveal" data-d="3">No cookies. No trackers on this page either.</p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var rmq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = rmq.matches;
+  rmq.addEventListener("change", function(){ location.reload(); });
+  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  /* ---- Hero load reveal ---- */
+  var hero = document.querySelector(".hero");
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ if(hero) hero.classList.add("loaded"); }); });
+
+  /* ---- Refusals marquee content ---- */
+  var track = document.getElementById("marqueeTrack");
+  if(track){
+    var words = ["No tracking","No dark patterns","On device","You own your data"];
+    var html = "";
+    for(var r=0;r<2;r++){
+      for(var i=0;i<words.length;i++){ html += '<span>'+words[i]+'</span><span class="solid">·</span>'; }
+    }
+    track.innerHTML = html + html; /* doubled for seamless loop */
+  }
+
+  /* ---- IntersectionObserver reveals + one-shot triggers ---- */
+  var revealEls = document.querySelectorAll(".reveal, .slab, .row, .principle");
+  if(reduce){
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+    document.querySelectorAll("[data-count]").forEach(function(el){ el.textContent = format(+el.getAttribute("data-count")); });
+  } else if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        e.target.classList.add("in");
+        if(e.target.id==="slab") startCounts(e.target);
+        io.unobserve(e.target);
+      });
+    }, { threshold:0.15, rootMargin:"0px 0px -12% 0px" });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+    document.querySelectorAll("[data-count]").forEach(function(el){ el.textContent = format(+el.getAttribute("data-count")); });
+  }
+
+  function format(n){ return n.toLocaleString("en-US"); }
+  var countsStarted = false;
+  function startCounts(slab){
+    if(countsStarted) return; countsStarted = true;
+    slab.querySelectorAll("[data-count]").forEach(function(el){
+      var target = +el.getAttribute("data-count"), start = performance.now(), dur = 1200;
+      function step(t){
+        var p = Math.min(1,(t-start)/dur), eased = 1-Math.pow(1-p,3);
+        el.textContent = format(Math.round(target*eased));
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  /* ---- Sticky nav: appear after hero, hide on fast down-scroll ---- */
+  var nav = document.getElementById("nav"), lastY = window.scrollY, ticking=false;
+  function onScrollNav(){
+    var y = window.scrollY, vh = window.innerHeight;
+    if(y > vh*0.85){ nav.classList.add("show"); } else { nav.classList.remove("show"); }
+    if(y > lastY + 4 && y > vh){ nav.classList.add("peek-hide"); }
+    else if(y < lastY - 4){ nav.classList.remove("peek-hide"); }
+    lastY = y;
+  }
+
+  /* ---- Marquee velocity + scroll bookkeeping ---- */
+  var mqTrack = document.getElementById("marqueeTrack"), mqOffset=0, mqBase=0.9, mqMul=1, mqWidth=0;
+  function measureMarquee(){ if(mqTrack) mqWidth = mqTrack.scrollWidth/2; }
+  measureMarquee(); window.addEventListener("resize", measureMarquee);
+
+  var vLast = window.scrollY, vel = 0;
+  window.addEventListener("scroll", function(){
+    if(!ticking){ requestAnimationFrame(function(){ onScrollNav(); ticking=false; }); ticking=true; }
+    var y = window.scrollY; vel = Math.min(60, Math.abs(y - vLast)); vLast = y;
+  }, {passive:true});
+
+  /* ---- Single rAF loop: spotlight + slab parallax + marquee ---- */
+  var mx=window.innerWidth/2, my=window.innerHeight/2, cx=mx, cy=my;
+  var spotlight = document.getElementById("spotlight");
+  var slab = document.getElementById("slab"), slabGlow = document.getElementById("slabGlow");
+
+  if(fine && !reduce){
+    window.addEventListener("pointermove", function(e){ mx=e.clientX; my=e.clientY; }, {passive:true});
+    if(spotlight) spotlight.style.opacity = "1";
+  }
+
+  function loop(){
+    if(fine && !reduce && spotlight){
+      cx += (mx-cx)*0.12; cy += (my-cy)*0.12;
+      spotlight.style.setProperty("--mx", cx+"px");
+      spotlight.style.setProperty("--my", cy+"px");
+      /* Culmo slab: ember blooms as cursor nears */
+      if(slab && slabGlow){
+        var r = slab.getBoundingClientRect(), scx=r.left+r.width/2, scy=r.top+r.height/2;
+        var d = Math.hypot(cx-scx, cy-scy), prox = Math.max(0, 1 - d/560);
+        slabGlow.style.opacity = (0.16 + prox*0.5).toFixed(3);
+      }
+    }
+    /* slab parallax */
+    if(slab && !reduce){
+      var rr = slab.getBoundingClientRect(), prog = (rr.top+rr.height/2 - window.innerHeight/2)/window.innerHeight;
+      slab.style.translate = "0 "+(Math.max(-40,Math.min(40, -prog*40))).toFixed(1)+"px";
+    }
+    /* marquee */
+    if(mqTrack && mqWidth && !reduce){
+      mqMul += ((1 + vel*0.05) - mqMul)*0.06; vel *= 0.9;
+      mqOffset -= mqBase*mqMul;
+      if(mqOffset <= -mqWidth) mqOffset += mqWidth;
+      mqTrack.style.transform = "translateX("+mqOffset+"px)";
+    }
+    requestAnimationFrame(loop);
+  }
+  if(!reduce) requestAnimationFrame(loop);
+
+  /* ---- Magnetic elements ---- */
+  if(fine && !reduce){
+    document.querySelectorAll(".magnetic").forEach(function(el){
+      el.addEventListener("pointermove", function(e){
+        var r = el.getBoundingClientRect(), dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2);
+        el.style.transform = "translate("+(dx*0.22).toFixed(1)+"px,"+(dy*0.28).toFixed(1)+"px)";
+      });
+      el.addEventListener("pointerleave", function(){
+        el.style.transition="transform .42s cubic-bezier(0.34,1.56,0.64,1)";
+        el.style.transform="translate(0,0)";
+        setTimeout(function(){ el.style.transition=""; }, 440);
+      });
+    });
+  }
+
+  /* ---- Email copy-to-clipboard ---- */
+  var email = document.getElementById("email"), toast = document.getElementById("toast");
+  function copyEmail(){
+    var addr = "manangamestudio@gmail.com";
+    var done = function(){ if(toast){ toast.classList.add("show"); setTimeout(function(){ toast.classList.remove("show"); },1800); } };
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(addr).then(done, fallback); }
+    else fallback();
+    function fallback(){ window.location.href = "mailto:"+addr; }
+  }
+  if(email){
+    email.addEventListener("click", copyEmail);
+    email.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); copyEmail(); } });
+  }
+
+  /* ---- Smooth-scroll for in-page anchors (respect reduced motion) ---- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click", function(e){
+      var id = a.getAttribute("href"); if(id.length<2) return;
+      var t = document.querySelector(id); if(!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block:"start" });
+    });
+  });
+})();
+</script>
+</body>
+</html>

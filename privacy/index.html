@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — RG App Studio</title>
+<meta name="description" content="The privacy policy for RG App Studio and its apps, including Culmo. Privacy-first, on-device where possible, and we never sell your data.">
+<meta name="color-scheme" content="dark">
+<style>
+/* =========================================================================
+   RG APP STUDIO — Privacy Policy
+   Editorial Noir, in document register: calm, readable, one serif, one brass
+   accent. Same tokens as the studio site. Zero external requests, no cookies,
+   no scripts. The wink stays true.
+   ========================================================================= */
+
+:root{
+  color-scheme: dark;
+
+  --bg:#0A0A0B;
+  --surface:#101012;
+  --elevated:#17171B;
+  --text:#F3EFE7;      /* warm ivory */
+  --muted:#8B857A;     /* warm grey, brass-biased */
+  --border:#242019;    /* warm near-black hairline base */
+  --accent:#C8A15A;    /* brass — the ONLY accent */
+
+  --hair: rgba(200,161,90,0.14);
+  --hair-strong: rgba(200,161,90,0.32);
+
+  --serif: "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans: -apple-system,"Segoe UI",Roboto,system-ui,"Helvetica Neue",Arial,sans-serif;
+  --mono: ui-monospace,"SFMono-Regular","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+
+  --e-underline: cubic-bezier(0.65,0,0.35,1);
+
+  --gutter: clamp(20px,5vw,72px);
+  --measure: 68ch;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; letter-spacing:-0.018em; text-wrap:balance; }
+p{ margin:0; }
+a{ color:inherit; text-decoration:none; }
+::selection{ background:rgba(200,161,90,0.28); color:#fff; }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+/* Subtle film grain, consistent with the studio site (no external request). */
+.grain{
+  position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.04;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px 160px;
+}
+
+/* ---- Inline link underline (brass wipe) ---- */
+.link{ position:relative; color:var(--text); overflow-wrap:anywhere; }
+.link::after{ content:""; position:absolute; left:0; bottom:-2px; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .34s var(--e-underline); }
+.link:hover::after{ transform:scaleX(1); }
+.link:not(:hover)::after{ transform-origin:right; }
+
+/* ---- Shell ---- */
+.wrap{ width:100%; max-width:820px; margin-inline:auto; padding-inline:var(--gutter); }
+
+/* ---- Masthead ---- */
+.masthead{ border-bottom:1px solid var(--hair); }
+.masthead-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px; height:66px; }
+.mark{ font-family:var(--serif); font-size:20px; letter-spacing:.02em; color:var(--text); }
+.mark b{ color:var(--accent); font-weight:400; }
+.back{ font-family:var(--sans); font-size:12.5px; letter-spacing:.04em; color:var(--muted); display:inline-flex; align-items:center; gap:8px; transition:color .3s ease; }
+.back:hover{ color:var(--text); }
+.back .arw{ color:var(--accent); }
+
+/* ---- Document head ---- */
+.dochead{ padding-block:clamp(48px,8vh,88px) clamp(28px,4vh,44px); }
+.folio{
+  font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent); display:flex; align-items:center; gap:12px; margin-bottom:22px;
+}
+.folio::after{ content:""; width:clamp(24px,6vw,72px); height:1px; background:var(--hair-strong); }
+.dochead h1{ font-size:clamp(2.3rem,6vw,3.8rem); line-height:1.02; margin-bottom:20px; }
+.docmeta{ font-family:var(--mono); font-size:12.5px; letter-spacing:.05em; color:var(--muted); line-height:1.8; }
+.docmeta .em{ color:var(--text); }
+
+/* ---- Contents ---- */
+.contents{ margin-top:clamp(30px,5vh,48px); border:1px solid var(--hair); border-radius:12px; padding:clamp(20px,3vw,30px); background:rgba(255,255,255,.012); }
+.contents h2{ font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+.toc{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:2px 28px; }
+@media (max-width:560px){ .toc{ grid-template-columns:1fr; } }
+.toc li{ display:flex; align-items:baseline; gap:12px; padding:6px 0; border-top:1px solid var(--hair); }
+.toc li:first-child, .toc li:nth-child(2){ border-top:none; }
+@media (max-width:560px){ .toc li:nth-child(2){ border-top:1px solid var(--hair); } }
+.toc .n{ font-family:var(--mono); font-size:11px; color:var(--accent); font-variant-numeric:tabular-nums; }
+.toc a{ font-size:14.5px; color:var(--muted); transition:color .25s ease; }
+.toc a:hover{ color:var(--text); }
+
+/* ---- Sections ---- */
+.section{ padding-block:clamp(40px,6vh,66px); border-top:1px solid var(--hair); }
+.section:first-of-type{ border-top:none; }
+.section > .measure{ max-width:var(--measure); }
+.section h2{ font-size:clamp(1.5rem,3.4vw,2.1rem); line-height:1.14; margin-bottom:6px; scroll-margin-top:24px; }
+.kicker{ font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.section h3{ font-size:1.18rem; line-height:1.3; margin-top:32px; margin-bottom:10px; color:var(--text); }
+.section p{ max-width:var(--measure); color:#d6d1c6; }
+.section p + p{ margin-top:14px; }
+.lead{ font-family:var(--serif); font-size:clamp(1.12rem,2vw,1.32rem); line-height:1.5; color:var(--text) !important; }
+strong{ color:var(--text); font-weight:600; }
+em{ font-style:italic; }
+
+ul.list{ max-width:var(--measure); margin:14px 0 0; padding:0; list-style:none; }
+ul.list li{ position:relative; padding-left:24px; margin-top:11px; color:#d6d1c6; }
+ul.list li::before{ content:""; position:absolute; left:2px; top:.72em; width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:.75; }
+ul.list li strong{ color:var(--text); }
+
+/* Highlighted "short version" panel */
+.panel{ max-width:var(--measure); margin-top:22px; border:1px solid var(--hair); border-left:2px solid var(--accent); border-radius:10px; padding:clamp(18px,3vw,26px); background:rgba(200,161,90,.035); }
+.panel .panel-lbl{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.panel ul{ margin:0; padding:0; list-style:none; }
+.panel li{ position:relative; padding-left:22px; margin-top:11px; color:#d6d1c6; }
+.panel li:first-child{ margin-top:0; }
+.panel li::before{ content:""; position:absolute; left:2px; top:.72em; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.panel li strong{ color:var(--text); }
+
+/* App section wrapper — anchored, quietly framed */
+.app{ scroll-margin-top:24px; }
+.note{ max-width:var(--measure); margin-top:20px; font-family:var(--sans); font-size:13.5px; line-height:1.6; color:var(--muted); border-top:1px solid var(--hair); padding-top:16px; }
+
+/* ---- Contact ---- */
+.contact-email{ font-family:var(--serif); font-size:clamp(1.4rem,3.4vw,2rem); color:var(--text); }
+.contact-email .link::after{ bottom:-3px; }
+
+/* ---- Footer ---- */
+.footer{ border-top:1px solid var(--hair); padding-block:clamp(36px,6vh,56px); }
+.footer .row{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+.footer .meta{ font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.footnav{ display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.legal-line{ margin-top:22px; font-family:var(--sans); font-size:11.5px; letter-spacing:.05em; line-height:1.8; color:var(--muted); max-width:70ch; }
+.legal-line a{ position:relative; color:var(--muted); transition:color .3s ease; }
+.legal-line a::after{ content:""; position:absolute; left:0; bottom:-2px; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .34s var(--e-underline); }
+.legal-line a:hover{ color:var(--text); }
+.legal-line a:hover::after{ transform:scaleX(1); }
+.legal-line a:not(:hover)::after{ transform-origin:right; }
+.footer .wink{ margin-top:16px; font-family:var(--sans); font-size:11.5px; letter-spacing:.06em; color:var(--muted); opacity:.72; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ transition-duration:.12s !important; }
+  .grain{ display:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="mark" href="../" aria-label="RG App Studio — home">R<b>G</b></a>
+    <a class="back" href="../">Back to studio <span class="arw" aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <!-- ===== DOCUMENT HEAD ===== -->
+  <div class="dochead">
+    <p class="folio">Privacy</p>
+    <h1>Privacy Policy</h1>
+    <p class="docmeta">
+      <span class="em">RG App Studio</span> — the trading name of <span class="em">Manan Bohra</span>, sole proprietor, India<br>
+      Last updated: <span class="em">21 July 2026</span> · Effective: <span class="em">21 July 2026</span><br>
+      Contact: <a class="link" href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a><br>
+      Related: <a class="link" href="../terms/">Terms of Use</a> · <a class="link" href="../refunds/">Refund &amp; Cancellation Policy</a>
+    </p>
+
+    <nav class="contents" aria-label="Contents">
+      <h2>On this page</h2>
+      <ol class="toc">
+        <li><span class="n">01</span><a href="#principles">Our principles</a></li>
+        <li><span class="n">02</span><a href="#how-to-read">How to read this policy</a></li>
+        <li><span class="n">03</span><a href="#culmo">Culmo</a></li>
+        <li><span class="n">04</span><a href="#apps-in-development">Apps in development</a></li>
+        <li><span class="n">05</span><a href="#advertising">Advertising &amp; analytics</a></li>
+        <li><span class="n">06</span><a href="#website">This website</a></li>
+        <li><span class="n">07</span><a href="#security">Data security</a></li>
+        <li><span class="n">08</span><a href="#changes">Changes to this policy</a></li>
+        <li><span class="n">09</span><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- ===== 01 · PRINCIPLES ===== -->
+  <section class="section" id="principles" aria-labelledby="principles-h">
+    <div class="measure">
+      <p class="kicker">01 — Our principles</p>
+      <h2 id="principles-h">How we think about your data</h2>
+      <p class="lead">RG App Studio is one person building small, calm apps. This page is the privacy policy for the studio and for every app it makes, starting with Culmo. As more apps launch, each gets its own section here.</p>
+      <p>Across everything we build, we hold to a few principles:</p>
+      <ul class="list">
+        <li><strong>Privacy-first, where possible.</strong> We ask for as little as an app needs to do its job, and we prefer designs that keep your data on your device.</li>
+        <li><strong>On-device where possible.</strong> Wherever an app can do its work locally, it does — so your data never has to leave your phone.</li>
+        <li><strong>You own your data.</strong> Where an app holds data you created, you can get it out and delete it.</li>
+        <li><strong>We never sell your data.</strong> Not now, not for any app under this studio.</li>
+      </ul>
+      <p>What we deliberately <em>do not</em> promise studio-wide is "no ads" or "no analytics" for every future app. Some apps we build later may be supported by ads or use analytics tools. When that is true of an app, that app's own section on this page says so plainly — and names what it collects and who it shares with. If an app's section does not mention ads, analytics, or tracking, that app does not do those things.</p>
+    </div>
+  </section>
+
+  <!-- ===== 02 · HOW TO READ ===== -->
+  <section class="section" id="how-to-read" aria-labelledby="htr-h">
+    <div class="measure">
+      <p class="kicker">02 — How to read this policy</p>
+      <h2 id="htr-h">Each app speaks for itself</h2>
+      <p>Because our apps don't all behave the same way, this policy is organised by app rather than by one set of blanket claims. Every practice below states exactly which app it applies to. If a data practice — collecting something, sharing it, showing ads — isn't listed under an app, that practice doesn't happen in that app.</p>
+      <p>This keeps each app's disclosures honest as the studio grows: a claim true for Culmo is written under Culmo, and a claim for a future app will be written under that app when it launches.</p>
+    </div>
+  </section>
+
+  <!-- ===== 03 · CULMO ===== -->
+  <section class="section app" id="culmo" aria-labelledby="culmo-h">
+    <div class="measure">
+      <p class="kicker">03 — Culmo</p>
+      <h2 id="culmo-h">Culmo</h2>
+      <p class="lead">Culmo (Google Play package <code style="font-family:var(--mono)">com.mananbohra.culmo</code>) is a workout logger built around a simple promise: <strong>your data stays on your device.</strong> This section explains what Culmo stores, what it does not do, and the control you have.</p>
+
+      <div class="panel">
+        <p class="panel-lbl">The short version</p>
+        <ul>
+          <li><strong>No account, no login, no cloud.</strong> You do not create an account to use Culmo.</li>
+          <li><strong>All your data is stored locally</strong> on your device in a private app database.</li>
+          <li><strong>Culmo does not transmit your personal or fitness data off the device.</strong> There are no ads, no analytics and no tracking SDKs; the only third-party service Culmo uses is RevenueCat, solely to process purchases (see Purchases below).</li>
+          <li><strong>Purchases (Culmo Pro)</strong> are handled by Google Play and RevenueCat using an <strong>anonymous</strong> ID — your workout and body data are never involved (see Purchases below).</li>
+          <li><strong>You are in full control</strong> — you can export your data, and you can erase all of it at any time.</li>
+        </ul>
+      </div>
+
+      <h3>What Culmo stores (locally, on your device)</h3>
+      <p>To function as a workout logger, Culmo stores the following in a private database that only Culmo can access:</p>
+      <ul class="list">
+        <li><strong>Workout logs:</strong> exercises, sets, reps, weights, rest times, RPE, notes, and dates.</li>
+        <li><strong>Body measurements:</strong> the values you choose to record (e.g. body weight, body-fat %, circumferences) and their dates.</li>
+        <li><strong>Templates and exercise library</strong>, including any custom exercises you create.</li>
+        <li><strong>Profile and preferences:</strong> an optional display name, an optional profile photo you select, unit choices (kg/lbs, etc.), theme, and timer/sound settings.</li>
+      </ul>
+      <p>This information never leaves your device unless <strong>you</strong> explicitly export or share it (see below).</p>
+
+      <h3>Permissions Culmo requests, and why</h3>
+      <ul class="list">
+        <li><strong>Notifications</strong> — to show the active-workout notification and rest-timer alerts.</li>
+        <li><strong>Foreground service / ignore battery optimizations</strong> — only while a workout is active, so the rest timer and workout tracking keep running reliably when the screen is off or the app is in the background. You can revoke this at any time in system settings.</li>
+        <li><strong>Photos / files</strong> — only when you choose to set a profile picture, or import/export a backup file. Culmo accesses only the file you pick.</li>
+        <li><strong>Keep screen on</strong> — an optional convenience during workouts; off unless you enable it.</li>
+      </ul>
+      <p>Culmo does <strong>not</strong> request location, contacts, microphone, or camera-for-capture permissions.</p>
+
+      <h3>Exporting and sharing (only when you ask)</h3>
+      <p>Culmo lets you export your data (for example, a JSON backup or summary) and share it using your device's standard share sheet. This happens <strong>only when you initiate it</strong>, and the data goes wherever you choose to send it. Once shared, that copy is outside Culmo's control.</p>
+
+      <h3>Deleting your data</h3>
+      <p>Because everything is local, you have direct control:</p>
+      <ul class="list">
+        <li>Delete individual workouts, measurements, templates, or exercises within the app.</li>
+        <li>Use <strong>Erase all data</strong> in Settings to wipe Culmo's database from your device.</li>
+        <li>Uninstalling the app also removes its local data.</li>
+      </ul>
+      <p>Culmo keeps your data on your device for as long as the app is installed or until you delete it; we hold no copy and therefore retain nothing on our side.</p>
+
+      <h3>Purchases (Culmo Pro)</h3>
+      <p>Culmo Pro is an optional paid upgrade. Purchases are processed by <strong>Google Play</strong> and <strong>RevenueCat</strong> (a billing-infrastructure provider). To validate a purchase and let you restore it after a reinstall or on a new device, an <strong>anonymous</strong> app-user identifier and your purchase receipt are shared with RevenueCat. <strong>No workout logs, body measurements, exercise data, name, or photo are ever sent</strong> — RevenueCat only ever receives the anonymous identifier and your subscription status. Google Play and RevenueCat handle billing data under their own privacy policies.</p>
+
+      <h3>Children's privacy</h3>
+      <p>Culmo is not directed at children under 13 and does not knowingly collect data from them.</p>
+
+      <h3>Future cloud features</h3>
+      <p>Culmo is designed to optionally share <strong>aggregated</strong> daily summaries (e.g. total volume, consistency score) with a companion productivity app ("The Brain"). This feature is <strong>not active in this version</strong> — no data is transmitted. If it is enabled in a future release, this policy will be updated to describe exactly what aggregated values are sent, and it would never include your individual sets, reps, or exercise-level logs.</p>
+    </div>
+  </section>
+
+  <!-- ===== 04 · APPS IN DEVELOPMENT ===== -->
+  <section class="section" id="apps-in-development" aria-labelledby="aid-h">
+    <div class="measure">
+      <p class="kicker">04 — Apps in development</p>
+      <h2 id="aid-h">Apps in development</h2>
+      <p>RG App Studio has more apps in progress. Until an app launches, it collects nothing — there is no app to run and no data to gather.</p>
+      <p>When one of these apps ships, it will get its own named section on this page, written before it goes live, describing what it stores, what permissions it needs, and anyone it shares data with. <strong>If an app shows ads, its section will name the advertising partner and state exactly what that partner collects.</strong> If an app offers accounts, its section will describe how to delete that account and its data. Nothing here applies to an app until that app has a section of its own.</p>
+    </div>
+  </section>
+
+  <!-- ===== 05 · ADVERTISING & ANALYTICS ===== -->
+  <section class="section" id="advertising" aria-labelledby="ad-h">
+    <div class="measure">
+      <p class="kicker">05 — Advertising &amp; analytics</p>
+      <h2 id="ad-h">Advertising &amp; analytics</h2>
+      <p>Some RG App Studio apps — now or in the future — may show ads or use analytics tools. Whenever an app does, that app's own section above discloses it: the ad or analytics provider is named, and so is the data it collects. This is never assumed studio-wide; it is always stated per app.</p>
+      <p><strong>Culmo carries no ads, no third-party analytics, and no tracking SDKs</strong>, as described in its section above. Any future app that behaves differently will say so in its own section — this section will never quietly change what is true of Culmo.</p>
+    </div>
+  </section>
+
+  <!-- ===== 06 · WEBSITE ===== -->
+  <section class="section" id="website" aria-labelledby="web-h">
+    <div class="measure">
+      <p class="kicker">06 — This website</p>
+      <h2 id="web-h">This website</h2>
+      <p>This site — every page on it, including the studio home page, this privacy page, the terms page and the refund &amp; cancellation page — sets no cookies, runs no analytics, and loads nothing from third parties. Everything is served as self-contained pages, so simply reading these pages does not track you or send your visit anywhere.</p>
+      <p>The one action that leaves the page is your choice: if you tap an email link, your own mail app opens so you can write to us.</p>
+    </div>
+  </section>
+
+  <!-- ===== 07 · DATA SECURITY ===== -->
+  <section class="section" id="security" aria-labelledby="sec-h">
+    <div class="measure">
+      <p class="kicker">07 — Data security</p>
+      <h2 id="sec-h">Data security</h2>
+      <p>Culmo keeps everything in a private on-device database that only Culmo can access, and it does not transmit your personal or fitness data off the device. Because your data isn't uploaded to a server, it is protected by your own device's security — your lock screen, encryption, and app sandboxing. We retain nothing about you on our side, because nothing leaves your device to retain.</p>
+      <p>The only exception is a purchase, if you choose to buy Culmo Pro: Google Play and RevenueCat receive an anonymous identifier and your subscription status, handled under their own privacy and security practices, as described in Culmo's Purchases section above.</p>
+    </div>
+  </section>
+
+  <!-- ===== 08 · CHANGES ===== -->
+  <section class="section" id="changes" aria-labelledby="chg-h">
+    <div class="measure">
+      <p class="kicker">08 — Changes to this policy</p>
+      <h2 id="chg-h">Changes to this policy</h2>
+      <p>If this policy changes, the "Last updated" date near the top of this page will change, and the new version will be published here at this same address — the policy URL listed on each app's store page. New apps are added as their own sections when they launch.</p>
+    </div>
+  </section>
+
+  <!-- ===== 09 · CONTACT ===== -->
+  <section class="section" id="contact" aria-labelledby="con-h">
+    <div class="measure">
+      <p class="kicker">09 — Contact</p>
+      <h2 id="con-h">Contact</h2>
+      <p>Questions about your privacy, or about any RG App Studio app? Write to us:</p>
+      <p class="contact-email" style="margin-top:16px;"><a class="link" href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="row">
+      <span class="meta">RG App Studio · Made in India · © 2026</span>
+      <span class="footnav">
+        <a class="back" href="../terms/">Terms of Use</a>
+        <a class="back" href="../refunds/">Refunds &amp; cancellation</a>
+        <a class="back" href="../">Back to studio <span class="arw" aria-hidden="true">→</span></a>
+      </span>
+    </div>
+    <!-- MERCHANT IDENTITY — OWNER ACTION RECOMMENDED. If you are willing to publish them, insert your
+         city and state before "India" below and in the identical .legal-line in /, /terms/ and
+         /refunds/, e.g. "…sole proprietor, Indore, Madhya Pradesh, India." Left as-is deliberately:
+         no locality was supplied, and inventing one on a KYC-facing page would be worse than
+         omitting it. -->
+    <p class="legal-line">RG App Studio is the trading name of Manan Bohra, sole proprietor, India. Sole support and grievance contact: <a href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a> — we read every email and usually reply within two business days.</p>
+    <p class="wink">No cookies. No trackers on this page either.</p>
+  </div>
+</footer>
+
+</body>
+</html>
