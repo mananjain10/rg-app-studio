@@ -2,7 +2,7 @@
 
 The public website for **RG App Studio**, the trading name of Manan Bohra, sole proprietor, India.
 
-Live site: **https://mananjain10.github.io/rg-app-studio/**
+Live site: **https://rg-app-studio.mananbohra1010.workers.dev**
 
 ## Pages
 
@@ -44,8 +44,24 @@ Keep in mind when editing the legal pages:
 
 ## Deploying
 
-Hosted on GitHub Pages from the `main` branch. Push to `main` and the site redeploys automatically
-within a minute or two.
+Hosted on **Cloudflare** (Workers Static Assets), connected to this repo's `main` branch. Push to
+`main` and the site redeploys automatically in well under a minute.
+
+GitHub Pages was tried first and abandoned — its build backend accepted the deployment and then
+never published it, failing at the deploy action's 600-second timeout on every attempt.
+
+### The `.assetsignore` file matters
+
+Cloudflare's assets directory is the **repo root**, so it uploads every file it finds. On the first
+deploy that included `.git/`, which made the full repository fetchable over HTTP from the live site.
+
+[`.assetsignore`](.assetsignore) is what prevents that. If you add a file to this repo that isn't a
+page visitors should be able to open, add it there too. After any deploy, a quick sanity check:
+
+```bash
+curl -o /dev/null -w '%{http_code}\n' https://rg-app-studio.mananbohra1010.workers.dev/.git/config
+# must print 404
+```
 
 ## Contact
 

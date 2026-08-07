@@ -1,0 +1,25 @@
+# Files in this repo that must NOT be served as part of the public website.
+#
+# Cloudflare deploys this repo with the assets directory set to the repo root,
+# which means it uploads EVERY file it finds unless that file is listed here.
+# Without this list it published .git/ — making the full repository history
+# fetchable over HTTP from the live site. Syntax is .gitignore-style.
+#
+# Rule of thumb: if it isn't a page a visitor should be able to open, it belongs
+# in this file.
+
+# Version control internals — the important one
+.git
+.gitignore
+
+# This file itself
+.assetsignore
+
+# Cloudflare/Wrangler build artifacts, generated during the build
+.wrangler
+wrangler.json
+wrangler.jsonc
+wrangler.toml
+
+# Repo documentation, not part of the site
+README.md
