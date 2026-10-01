@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — RG App Studio</title>
-<meta name="description" content="The privacy policy for RG App Studio and its apps, including Culmo. Privacy-first, on-device where possible, and we never sell your data.">
+<meta name="description" content="The privacy policy for RG App Studio and its apps, including Culmo and Alarm Clock: Heavy Sleepers. Privacy-first, on-device where possible, and we never sell your data.">
 <meta name="color-scheme" content="dark">
 <style>
 /* =========================================================================
@@ -182,7 +182,7 @@ ul.list li strong{ color:var(--text); }
     <h1>Privacy Policy</h1>
     <p class="docmeta">
       <span class="em">RG App Studio</span> — the trading name of <span class="em">Manan Bohra</span>, sole proprietor, India<br>
-      Last updated: <span class="em">21 July 2026</span> · Effective: <span class="em">21 July 2026</span><br>
+      Last updated: <span class="em">1 October 2026</span> · Effective: <span class="em">1 October 2026</span><br>
       Contact: <a class="link" href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a><br>
       Related: <a class="link" href="../terms/">Terms of Use</a> · <a class="link" href="../refunds/">Refund &amp; Cancellation Policy</a>
     </p>
@@ -193,12 +193,13 @@ ul.list li strong{ color:var(--text); }
         <li><span class="n">01</span><a href="#principles">Our principles</a></li>
         <li><span class="n">02</span><a href="#how-to-read">How to read this policy</a></li>
         <li><span class="n">03</span><a href="#culmo">Culmo</a></li>
-        <li><span class="n">04</span><a href="#apps-in-development">Apps in development</a></li>
-        <li><span class="n">05</span><a href="#advertising">Advertising &amp; analytics</a></li>
-        <li><span class="n">06</span><a href="#website">This website</a></li>
-        <li><span class="n">07</span><a href="#security">Data security</a></li>
-        <li><span class="n">08</span><a href="#changes">Changes to this policy</a></li>
-        <li><span class="n">09</span><a href="#contact">Contact</a></li>
+        <li><span class="n">04</span><a href="#alarm-clock-heavy-sleepers">Alarm Clock: Heavy Sleepers</a></li>
+        <li><span class="n">05</span><a href="#apps-in-development">Apps in development</a></li>
+        <li><span class="n">06</span><a href="#advertising">Advertising &amp; analytics</a></li>
+        <li><span class="n">07</span><a href="#website">This website</a></li>
+        <li><span class="n">08</span><a href="#security">Data security</a></li>
+        <li><span class="n">09</span><a href="#changes">Changes to this policy</a></li>
+        <li><span class="n">10</span><a href="#contact">Contact</a></li>
       </ol>
     </nav>
   </div>
@@ -208,7 +209,7 @@ ul.list li strong{ color:var(--text); }
     <div class="measure">
       <p class="kicker">01 — Our principles</p>
       <h2 id="principles-h">How we think about your data</h2>
-      <p class="lead">RG App Studio is one person building small, calm apps. This page is the privacy policy for the studio and for every app it makes, starting with Culmo. As more apps launch, each gets its own section here.</p>
+      <p class="lead">RG App Studio is one person building small, calm apps. This page is the privacy policy for the studio and for every app it makes: today, Culmo and Alarm Clock: Heavy Sleepers. As more apps launch, each gets its own section here.</p>
       <p>Across everything we build, we hold to a few principles:</p>
       <ul class="list">
         <li><strong>Privacy-first, where possible.</strong> We ask for as little as an app needs to do its job, and we prefer designs that keep your data on your device.</li>
@@ -290,59 +291,140 @@ ul.list li strong{ color:var(--text); }
     </div>
   </section>
 
-  <!-- ===== 04 · APPS IN DEVELOPMENT ===== -->
+  <!-- ===== 04 · ALARM CLOCK: HEAVY SLEEPERS ===== -->
+  <section class="section app" id="alarm-clock-heavy-sleepers" aria-labelledby="achs-h">
+    <div class="measure">
+      <p class="kicker">04 — Alarm Clock: Heavy Sleepers</p>
+      <h2 id="achs-h">Alarm Clock: Heavy Sleepers</h2>
+      <p class="lead">Alarm Clock: Heavy Sleepers (Google Play package <code style="font-family:var(--mono)">com.mananbohra.alarmate</code>) is an alarm clock built around missions: small tasks, like a math problem, a QR code to scan or a phrase to say out loud, that you complete to prove you're actually awake. Like everything this studio builds, it is local-first: <strong>your alarms, streaks and stats live on your phone, not on a server.</strong></p>
+
+      <div class="panel">
+        <p class="panel-lbl">The short version</p>
+        <ul>
+          <li><strong>No account, no login, no server of ours.</strong> You do not create an account to use Alarm Clock: Heavy Sleepers.</li>
+          <li><strong>All your alarm data is stored locally</strong> on your device: alarms, missions, wake history, streaks, statistics, flashcard decks, morning routines, and any alarm sounds you import.</li>
+          <li><strong>Alarm Clock: Heavy Sleepers does not upload your personal data.</strong> There is no server of ours holding a copy of anything you create in the app.</li>
+          <li>It uses <strong>two</strong> Google libraries that talk to Google, both named and described plainly below: <strong>Firebase Crashlytics</strong>, for crash and error reports (it also checks in with Google when the app starts), and <strong>ML Kit</strong>, which recognises barcodes, faces and poses on your device for the camera missions and reports technical diagnostics about itself to Google. Neither receives your alarms, wake history, camera images, or anything you typed. Google Play itself handles purchases and may show its own rating prompt. There is no analytics SDK and there are no ads.</li>
+          <li><strong>Purchases (Alarm Clock: Heavy Sleepers Premium)</strong> are handled by Google Play; we never see your payment details.</li>
+          <li><strong>You are in full control.</strong> You can export your alarms as a backup file, exclude any alarm from your statistics, and erase everything by clearing the app's data or uninstalling (the copy of your alarms in your Android backup is managed in your Google account's backup settings).</li>
+        </ul>
+      </div>
+
+      <h3>What Alarm Clock: Heavy Sleepers stores (locally, on your device)</h3>
+      <p>To work as an alarm clock, the app keeps the following in private app storage that only it can access:</p>
+      <ul class="list">
+        <li><strong>Alarms and their settings:</strong> times, repeat days, labels, sounds, volume, snooze rules, and each alarm's mission configuration.</li>
+        <li><strong>Wake history and streaks:</strong> which mornings you woke on time, snoozes, and the statistics built from them.</li>
+        <li><strong>Mission content you add:</strong> flashcard decks you import, phrases you set for the voice mission, a registered QR or barcode value, an NFC tag identifier, a name and two magnetic-field readings for each spot you register in Magnet Hunt, and, for the photo mission, a small mathematical fingerprint (a "perceptual hash") of your chosen scene. <strong>The photo mission never stores a photo.</strong> Only the fingerprint is kept; it cannot be turned back into an image.</li>
+        <li><strong>Audio files you import</strong> as custom alarm sounds, copied into the app's own storage so your alarm still rings if the original file moves.</li>
+        <li><strong>Preferences and routines:</strong> theme, morning-routine items and any journal lines you write there, reminder settings, and similar choices.</li>
+        <li><strong>A local reliability log:</strong> timestamps of when alarms were scheduled and when they actually rang, kept on your device to power the in-app Reliability Score, and any "My alarm didn't ring" reports you file (see below).</li>
+      </ul>
+      <p>None of this leaves your device unless <strong>you</strong> export or share it, apart from your alarms in your phone's own backup (see Backups below).</p>
+
+      <h3>Permissions Alarm Clock: Heavy Sleepers requests, and why</h3>
+      <ul class="list">
+        <li><strong>Alarms &amp; reminders (exact alarms):</strong> to ring at exactly the time you set. This is the core of the app.</li>
+        <li><strong>Notifications and full-screen alerts:</strong> to show the ringing alarm over your lock screen.</li>
+        <li><strong>Run at startup:</strong> to re-arm your alarms after your phone restarts.</li>
+        <li><strong>Foreground service, wake lock and vibration:</strong> to keep the alarm, and the optional gentle wake-up sound before it, playing reliably until you dismiss it.</li>
+        <li><strong>Camera:</strong> only for the camera missions (QR Code, Photo, Colour Hunt, Big Smile, Make This Face and Dance Party), while you set one up or test it, while that mission is on screen, and in the camera test under Settings, Diagnostics &amp; developer tools. Camera frames are processed on your device (by Google's ML Kit in four of these missions, see below) and are never stored or uploaded.</li>
+        <li><strong>Microphone:</strong> only for the Voice mission, and only while it is listening. Speech is handled by your device's own speech recognition service (typically Google's); on some devices that service may process audio in the cloud under Google's own policies. Alarm Clock: Heavy Sleepers itself never records, stores, or transmits audio.</li>
+        <li><strong>NFC:</strong> only for the NFC Tag mission; the scanned tag's identifier is compared on your device against the one you registered.</li>
+        <li><strong>Network access:</strong> only for the two Google libraries described below: so Firebase Crashlytics can check in when the app starts and send a crash or error report, and so Google's ML Kit can send its technical diagnostics. The app makes no other network calls of its own; the system speech recogniser used by the Voice mission may use the network under Google's policies, as noted above.</li>
+      </ul>
+      <p>Some things need no permission at all. Missions that ask you to move, such as Shake, Squats, Simon Says, Don't Spill It, Room Sweep and Magnet Hunt, read your phone's motion and magnetic-field sensors live; nothing is recorded except the magnetic-field readings for the spots you register in Magnet Hunt, listed above. When you import an alarm sound or a flashcard deck, or restore a backup, you choose the file in Android's own file picker, and the app accesses only the file you pick; it has no access to the rest of your photos or files. Exporting a backup hands the file to Android's share sheet, and it goes only to the app you choose there.</p>
+      <p>Alarm Clock: Heavy Sleepers does <strong>not</strong> request location or contacts.</p>
+
+      <h3>Crash reporting</h3>
+      <p>Alarm Clock: Heavy Sleepers sends crash and error reports to one service, and only this one:</p>
+      <ul class="list">
+        <li><strong>Firebase Crashlytics:</strong> if the app crashes or hits an unexpected error, a report is sent to Google so we can find and fix the bug. A report contains the technical details of the failure (what the code was doing), your device model, OS version, and a random installation identifier. It never contains your alarms, wake history, or anything you typed. Crashlytics also contacts Google each time the app starts, to register that random installation identifier and open a session with the app version and device details, so that a later report can be matched to them. Crash reporting is turned off in development builds.</li>
+      </ul>
+      <p>Crash reports are sent encrypted, are not linked to your identity, and are not used to track you. There is no usage-analytics SDK in Alarm Clock: Heavy Sleepers (the app does not send "feature used" events anywhere; the only other technical reporting is ML Kit's, described next) and no advertising SDK, so no advertising ID is collected. Crashlytics is operated by Google and processes crash data under Google's privacy policy; you can read Firebase's data practices at <a class="link" href="https://firebase.google.com/support/privacy">firebase.google.com/support/privacy</a>.</p>
+
+      <h3>Camera recognition (Google ML Kit)</h3>
+      <p>The QR Code, Big Smile, Make This Face and Dance Party missions use <strong>Google's ML Kit</strong>, a library that runs on your device, to find a barcode, a face or a pose in the camera picture. The recognition happens on your phone, and <strong>no camera image ever leaves it.</strong> Google states that the ML Kit library reports technical diagnostics about itself to Google: your device model, OS version and available hardware acceleration, the app's package name and version, a per-installation identifier that is not meant to identify you, and timings, settings, event types and error codes for the recognition it ran. This is sent encrypted, is not passed on by Google to third parties, and is not something the app can switch off. ML Kit receives no alarms, no wake history and nothing you typed. Google describes this collection at <a class="link" href="https://developers.google.com/ml-kit/android-data-disclosure">developers.google.com/ml-kit/android-data-disclosure</a>.</p>
+
+      <h3>Purchases and Google Play</h3>
+      <p>Alarm Clock: Heavy Sleepers Premium is an optional paid upgrade. Purchases are processed entirely by <strong>Google Play</strong>; the app receives only confirmation that your purchase is active, so it can unlock premium features and restore them after a reinstall. We never see your payment details, and <strong>your alarm data is never involved in a purchase.</strong> Once your wake-up streak reaches a milestone, the app may also ask Google Play to show its standard rating prompt; that prompt belongs to Google Play, runs under Google's policies, and the app never learns what you answer.</p>
+
+      <h3>Backups, exporting and sharing</h3>
+      <ul class="list">
+        <li><strong>Android's own backup:</strong> your alarms (only your alarms, not your streaks or purchase state) are included in Android's standard device backup to your Google account, controlled by your device's backup settings, so a new phone restores your alarms.</li>
+        <li><strong>Export and import:</strong> you can export your alarms to a file and share or restore it. This happens <strong>only when you start it</strong>, and the file goes wherever you choose to send it.</li>
+        <li><strong>"My alarm didn't ring" report:</strong> if an alarm fails, you can choose to send us a diagnostic report through your device's share sheet. The report contains the app version, your phone's manufacturer and OS version, the status of each permission the app needs, the alarm's time and recent ring history, the app's reliability score and any note you add; you see the text before sending, and nothing is sent unless you send it.</li>
+      </ul>
+
+      <h3>Deleting your data</h3>
+      <p>Everything is local, so you have direct control:</p>
+      <ul class="list">
+        <li>Delete any alarm, deck, sound, or history entry within the app.</li>
+        <li>Clear the app's storage in system settings to wipe everything.</li>
+        <li>Uninstalling the app also removes all of its local data.</li>
+      </ul>
+      <p>We hold no copy of your app data, so there is nothing to delete on our side. If you have emailed us a "didn't ring" report, we keep that email only to help you and delete it on request. Crash reports already sent to Google are kept under Firebase's retention policies and deleted automatically after a fixed period; to ask for deletion sooner, contact us. ML Kit's diagnostics are held by Google under its own privacy policy.</p>
+
+      <h3>Children's privacy</h3>
+      <p>Alarm Clock: Heavy Sleepers is not directed at children under 13 and does not knowingly collect data from them.</p>
+    </div>
+  </section>
+
+  <!-- ===== 05 · APPS IN DEVELOPMENT ===== -->
   <section class="section" id="apps-in-development" aria-labelledby="aid-h">
     <div class="measure">
-      <p class="kicker">04 — Apps in development</p>
+      <p class="kicker">05 — Apps in development</p>
       <h2 id="aid-h">Apps in development</h2>
-      <p>RG App Studio has more apps in progress. Until an app launches, it collects nothing — there is no app to run and no data to gather.</p>
+      <p>RG App Studio has two more apps in progress: a hydration reminder and a focus app. Until an app launches, it collects nothing — there is no app to run and no data to gather.</p>
       <p>When one of these apps ships, it will get its own named section on this page, written before it goes live, describing what it stores, what permissions it needs, and anyone it shares data with. <strong>If an app shows ads, its section will name the advertising partner and state exactly what that partner collects.</strong> If an app offers accounts, its section will describe how to delete that account and its data. Nothing here applies to an app until that app has a section of its own.</p>
     </div>
   </section>
 
-  <!-- ===== 05 · ADVERTISING & ANALYTICS ===== -->
+  <!-- ===== 06 · ADVERTISING & ANALYTICS ===== -->
   <section class="section" id="advertising" aria-labelledby="ad-h">
     <div class="measure">
-      <p class="kicker">05 — Advertising &amp; analytics</p>
+      <p class="kicker">06 — Advertising &amp; analytics</p>
       <h2 id="ad-h">Advertising &amp; analytics</h2>
       <p>Some RG App Studio apps — now or in the future — may show ads or use analytics tools. Whenever an app does, that app's own section above discloses it: the ad or analytics provider is named, and so is the data it collects. This is never assumed studio-wide; it is always stated per app.</p>
       <p><strong>Culmo carries no ads, no third-party analytics, and no tracking SDKs</strong>, as described in its section above. Any future app that behaves differently will say so in its own section — this section will never quietly change what is true of Culmo.</p>
+      <p><strong>Alarm Clock: Heavy Sleepers carries no ads and no analytics about you.</strong> What it sends is limited to Firebase Crashlytics' crash and error reports and start-up check-in, and the technical diagnostics Google's ML Kit reports about itself during the camera missions, both described in its section above: never usage data about you.</p>
     </div>
   </section>
 
-  <!-- ===== 06 · WEBSITE ===== -->
+  <!-- ===== 07 · WEBSITE ===== -->
   <section class="section" id="website" aria-labelledby="web-h">
     <div class="measure">
-      <p class="kicker">06 — This website</p>
+      <p class="kicker">07 — This website</p>
       <h2 id="web-h">This website</h2>
       <p>This site — every page on it, including the studio home page, this privacy page, the terms page and the refund &amp; cancellation page — sets no cookies, runs no analytics, and loads nothing from third parties. Everything is served as self-contained pages, so simply reading these pages does not track you or send your visit anywhere.</p>
       <p>The one action that leaves the page is your choice: if you tap an email link, your own mail app opens so you can write to us.</p>
     </div>
   </section>
 
-  <!-- ===== 07 · DATA SECURITY ===== -->
+  <!-- ===== 08 · DATA SECURITY ===== -->
   <section class="section" id="security" aria-labelledby="sec-h">
     <div class="measure">
-      <p class="kicker">07 — Data security</p>
+      <p class="kicker">08 — Data security</p>
       <h2 id="sec-h">Data security</h2>
       <p>Culmo keeps everything in a private on-device database that only Culmo can access, and it does not transmit your personal or fitness data off the device. Because your data isn't uploaded to a server, it is protected by your own device's security — your lock screen, encryption, and app sandboxing. We retain nothing about you on our side, because nothing leaves your device to retain.</p>
       <p>The only exception is a purchase, if you choose to buy Culmo Pro: Google Play and RevenueCat receive an anonymous identifier and your subscription status, handled under their own privacy and security practices, as described in Culmo's Purchases section above.</p>
+      <p>Alarm Clock: Heavy Sleepers also keeps your data in private storage on your device, protected the same way. What leaves the device is limited to Firebase Crashlytics' start-up check-in and its reports if the app crashes or hits an error (never your alarms or anything you typed), the technical diagnostics Google's ML Kit reports about itself during the camera missions (never a camera image), the speech the Voice mission hands to your device's own recogniser while it listens, Google Play's confirmation of a Premium purchase, your alarms in your own Google backup if device backup is on, and anything you yourself choose to export or share. The Google services handle what they receive under Google's own privacy and security practices, as described in the app's section above; anything you export or share goes wherever you send it.</p>
     </div>
   </section>
 
-  <!-- ===== 08 · CHANGES ===== -->
+  <!-- ===== 09 · CHANGES ===== -->
   <section class="section" id="changes" aria-labelledby="chg-h">
     <div class="measure">
-      <p class="kicker">08 — Changes to this policy</p>
+      <p class="kicker">09 — Changes to this policy</p>
       <h2 id="chg-h">Changes to this policy</h2>
       <p>If this policy changes, the "Last updated" date near the top of this page will change, and the new version will be published here at this same address — the policy URL listed on each app's store page. New apps are added as their own sections when they launch.</p>
     </div>
   </section>
 
-  <!-- ===== 09 · CONTACT ===== -->
+  <!-- ===== 10 · CONTACT ===== -->
   <section class="section" id="contact" aria-labelledby="con-h">
     <div class="measure">
-      <p class="kicker">09 — Contact</p>
+      <p class="kicker">10 — Contact</p>
       <h2 id="con-h">Contact</h2>
       <p>Questions about your privacy, or about any RG App Studio app? Write to us:</p>
       <p class="contact-email" style="margin-top:16px;"><a class="link" href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a></p>

@@ -434,7 +434,7 @@ main{ position:relative; z-index:2; }   /* all content above the spotlight, belo
       <div class="trust reveal" data-d="4">
         <span>On-device</span><span class="sep"></span>
         <span>Offline-first</span><span class="sep"></span>
-        <span>No telemetry</span>
+        <span>No usage tracking</span>
       </div>
     </div>
   </section>
@@ -532,14 +532,16 @@ main{ position:relative; z-index:2; }   /* all content above the spotlight, belo
         </div>
       </div>
 
-      <!-- In-development rows -->
+      <!-- App rows: 02 is launching on Google Play (its pricing follows it), 03 and 04 are in development -->
       <div class="rows">
         <article class="row reveal">
           <div class="row-idx">02</div>
           <div class="row-body">
-            <h3 class="row-title">The alarm you have to outsmart</h3>
-            <p class="row-desc">A puzzle-locked alarm clock — solve a challenge to dismiss it, so you actually wake up instead of hitting snooze.</p>
-            <span class="row-tag"><span class="dot"></span> In development</span>
+            <h3 class="row-title">Alarm Clock: Heavy Sleepers</h3>
+            <p class="row-desc">A loud alarm clock for heavy sleepers with missions you have to solve before the ringing stops.</p>
+            <!-- LAUNCH: swap this tag for the Google Play link below (package com.mananbohra.alarmate), and delete the "Premium becomes purchasable once ... is live" sentence in the pricing pc-note below this row. -->
+            <span class="row-tag"><span class="dot"></span> Launching on Google Play</span>
+            <!-- <a class="chip chip-link" href="https://play.google.com/store/apps/details?id=com.mananbohra.alarmate"><span class="dot"></span> On Google Play <span class="chip-arw" aria-hidden="true">→</span></a> -->
           </div>
           <div class="mock mock-alarm" aria-hidden="true">
             <div class="mk-time">06:30</div>
@@ -548,6 +550,41 @@ main{ position:relative; z-index:2; }   /* all content above the spotlight, belo
             <div class="mk-chips"><span>54</span><span class="on">56</span><span>58</span></div>
           </div>
         </article>
+      </div>
+
+      <!-- Alarm Clock: Heavy Sleepers pricing: sits under its row 02, as Culmo's pricing sits under its card. No top hairline (row 02 draws one). -->
+      <div class="pricing" style="border-top:0;padding-top:0">
+        <div>
+          <p class="pc-kicker reveal">Pricing · Alarm Clock: Heavy Sleepers</p>
+          <h3 class="pc-title reveal" data-d="1">Free to wake up. Premium only if you want more.</h3>
+          <p class="pc-lede reveal" data-d="1">Alarm Clock: Heavy Sleepers is free to download and free to use as a complete alarm clock, permanently, with 15 missions included. Premium is optional, and the alarms you have already saved keep working without it.</p>
+          <p class="pc-unlocks reveal" data-d="2">Premium unlocks <b>10 premium missions</b>, <b>Gentle wake-up</b>, <b>Wake-Up Check</b>, <b>Mission chaining</b>, <b>Themes everywhere</b> and the <b>Morning routine</b>.</p>
+        </div>
+        <div class="reveal" data-d="2">
+          <div class="pc-row">
+            <span class="pc-name">Alarm Clock: Heavy Sleepers, the alarm clock</span>
+            <span class="pc-price">Free<small>forever</small></span>
+          </div>
+          <div class="pc-row">
+            <span class="pc-name">Premium, monthly</span>
+            <span class="pc-price">$0.99<small>/ month</small></span>
+          </div>
+          <div class="pc-row">
+            <span class="pc-name">Premium, yearly</span>
+            <span class="pc-price">$9.99<small>/ year</small></span>
+          </div>
+          <div class="pc-row">
+            <span class="pc-name">Premium, lifetime</span>
+            <span class="pc-price">$14.99<small>one-time</small></span>
+          </div>
+          <p class="pc-note">
+            Same terms as Culmo's: prices in US dollars set in Google Play, charged in your own local currency with the exact amount shown before you confirm. <strong style="color:var(--text);font-weight:500">There is no free trial.</strong> All purchases are processed by Google Play; we never see or store your card details. Premium becomes purchasable once Alarm Clock: Heavy Sleepers is live on Google Play.
+            <br><br>Full <a class="pc-link" href="refunds/">refund &amp; cancellation policy</a>, and the <a class="pc-link" href="terms/">terms of use</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="rows">
 
         <article class="row reveal">
           <div class="row-idx">03</div>
@@ -594,7 +631,7 @@ main{ position:relative; z-index:2; }   /* all content above the spotlight, belo
 
       <div class="principle reveal">
         <div class="principle-n">01</div>
-        <div><p class="principle-stmt">On your device, always.</p><p class="principle-sub">Every app does its data work locally — your logs, habits, and history never leave your phone.</p></div>
+        <div><p class="principle-stmt">On your device, always.</p><p class="principle-sub">Every app does its data work locally — your logs, alarms, habits and history stay on your phone.</p></div>
       </div>
       <div class="principle reveal">
         <div class="principle-n">02</div>
@@ -631,7 +668,7 @@ main{ position:relative; z-index:2; }   /* all content above the spotlight, belo
         <div class="facts">
           <div class="fact"><span class="fk">Founded</span><span class="fv">2026</span></div>
           <div class="fact"><span class="fk">Based in</span><span class="fv">India</span></div>
-          <div class="fact"><span class="fk">Apps in progress</span><span class="fv">04</span></div>
+          <div class="fact"><span class="fk">Apps</span><span class="fv">04</span></div>
         </div>
         <div class="seal" title="RG maker's mark">
           <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
