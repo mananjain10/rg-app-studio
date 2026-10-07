@@ -182,7 +182,7 @@ ul.list li strong{ color:var(--text); }
     <h1>Privacy Policy</h1>
     <p class="docmeta">
       <span class="em">RG App Studio</span> — the trading name of <span class="em">Manan Bohra</span>, sole proprietor, India<br>
-      Last updated: <span class="em">1 October 2026</span> · Effective: <span class="em">1 October 2026</span><br>
+      Last updated: <span class="em">7 October 2026</span> · Effective: <span class="em">7 October 2026</span><br>
       Contact: <a class="link" href="mailto:manangamestudio@gmail.com">manangamestudio@gmail.com</a><br>
       Related: <a class="link" href="../terms/">Terms of Use</a> · <a class="link" href="../refunds/">Refund &amp; Cancellation Policy</a>
     </p>
@@ -245,6 +245,7 @@ ul.list li strong{ color:var(--text); }
           <li><strong>All your data is stored locally</strong> on your device in a private app database.</li>
           <li><strong>Culmo does not transmit your personal or fitness data off the device.</strong> There are no ads, no analytics and no tracking SDKs; the only third-party service Culmo uses is RevenueCat, solely to process purchases (see Purchases below).</li>
           <li><strong>Purchases (Culmo Pro)</strong> are handled by Google Play and RevenueCat using an <strong>anonymous</strong> ID — your workout and body data are never involved (see Purchases below).</li>
+          <li><strong>Health Connect is optional and on-device.</strong> If you turn it on, Culmo adds a basic record of each finished workout (type, name, start and end time) to Android's Health Connect. Culmo never reads anything from Health Connect (see Health Connect below).</li>
           <li><strong>You are in full control</strong> — you can export your data, and you can erase all of it at any time.</li>
         </ul>
       </div>
@@ -265,18 +266,31 @@ ul.list li strong{ color:var(--text); }
         <li><strong>Foreground service / ignore battery optimizations</strong> — only while a workout is active, so the rest timer and workout tracking keep running reliably when the screen is off or the app is in the background. You can revoke this at any time in system settings.</li>
         <li><strong>Photos / files</strong> — only when you choose to set a profile picture, or import/export a backup file. Culmo accesses only the file you pick.</li>
         <li><strong>Keep screen on</strong> — an optional convenience during workouts; off unless you enable it.</li>
+        <li><strong>Health Connect: write exercise</strong> — only if you turn on Health Connect in Settings, so Culmo can add your finished workouts there. Culmo requests no permission to read health data.</li>
       </ul>
       <p>Culmo does <strong>not</strong> request location, contacts, microphone, or camera-for-capture permissions.</p>
 
       <h3>Exporting and sharing (only when you ask)</h3>
-      <p>Culmo lets you export your data (for example, a JSON backup or summary) and share it using your device's standard share sheet. This happens <strong>only when you initiate it</strong>, and the data goes wherever you choose to send it. Once shared, that copy is outside Culmo's control.</p>
+      <p>Culmo lets you export your data (for example, a JSON backup or summary) and share it using your device's standard share sheet. This happens <strong>only when you initiate it</strong>, and the data goes wherever you choose to send it — for example, copying a workout to paste into an AI assistant. Once shared, that copy is outside Culmo's control.</p>
+
+      <h3>Health Connect (optional)</h3>
+      <p>Health Connect is an Android service that stores health and fitness data <strong>on your device</strong> and lets the apps you choose share it. Culmo's Health Connect sync (available from Culmo 1.0.5) is <strong>off by default</strong>; you turn it on in Settings → Connected apps, and Android asks for your permission first.</p>
+      <ul class="list">
+        <li><strong>What Culmo writes:</strong> for each finished workout, one exercise session — the type ("strength training"), the workout's name, and its start and end time, plus the technical details Health Connect needs (an internal record ID so Culmo can update or remove the session, and the device type). If you choose "Add past workouts", the same is written for your earlier finished workouts.</li>
+        <li><strong>What Culmo never writes:</strong> sets, reps, weights, notes, personal records, body measurements or photos.</li>
+        <li><strong>What Culmo reads:</strong> nothing. Culmo only asks for permission to <em>write</em> exercise data and never reads data from Health Connect.</li>
+        <li><strong>Who can see it:</strong> data in Health Connect is managed by Android. Other apps can read it only if you grant them permission in Health Connect.</li>
+        <li><strong>Keeping it in sync:</strong> deleting a workout in Culmo (or using Erase all data) also removes the session Culmo added for it while sync is on.</li>
+        <li><strong>Turning it off:</strong> switch it off in Culmo's Settings, or remove Culmo's permission in Health Connect. Sessions already added stay in Health Connect until you delete them there (Health Connect → Data and access).</li>
+      </ul>
+      <p>Culmo does not send Health Connect data to us or to any third party, and does not use it for advertising.</p>
 
       <h3>Deleting your data</h3>
       <p>Because everything is local, you have direct control:</p>
       <ul class="list">
         <li>Delete individual workouts, measurements, templates, or exercises within the app.</li>
         <li>Use <strong>Erase all data</strong> in Settings to wipe Culmo's database from your device.</li>
-        <li>Uninstalling the app also removes its local data.</li>
+        <li>Uninstalling the app also removes its local data. Sessions Culmo added to Health Connect are kept by Health Connect; delete them there if you no longer want them.</li>
       </ul>
       <p>Culmo keeps your data on your device for as long as the app is installed or until you delete it; we hold no copy and therefore retain nothing on our side.</p>
 
